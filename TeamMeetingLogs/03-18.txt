@@ -1,0 +1,10 @@
+Date: 3/18/24 - 16:45
+Scribe: Apollo
+All members in attendance
+
+Broke down the rubric of the weekly meetings
+Main branch is the only branch that will be graded
+Each meeting we will walk through the release notes and each person's plan for the following week
+Project is a minimum of three pages [register, login, home]
+Use Case diagram should include people who are not logged in and people who are logged in at a minimum
+From now on, the labs will center around working on our project. Project should be working when we come to lab.
