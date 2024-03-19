@@ -8,7 +8,7 @@ Apollo Hoffman: Apollo10101, kaho5265@colorado.edu
 
 Santana Reyes: santanareyes, santana.reyes@colorado.edu
 
-Michael Sexton: 
+Michael Sexton: MichaelSexton3389, mise3389colorado.edu
 
 Billy Daves: 
 
