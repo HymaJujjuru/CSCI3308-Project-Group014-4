@@ -6,7 +6,7 @@ Hyma Jujjuru: hymajujjuru, hyma.jujjuru@colorado.edu
 
 Apollo Hoffman: Apollo10101, kaho5265@colorado.edu
 
-Santana Reyes: 
+Santana Reyes: santanareyes, santana.reyes@colorado.edu
 
 Michael Sexton: 
 
