@@ -10,7 +10,7 @@ Santana Reyes: santanareyes, santana.reyes@colorado.edu
 
 Michael Sexton: MichaelSexton3389, mise3389colorado.edu
 
-Billy Daves: 
+Billy Daves: wida4809, wida4809@colorado.edu
 
 # (Application Name)
 (Application description)
