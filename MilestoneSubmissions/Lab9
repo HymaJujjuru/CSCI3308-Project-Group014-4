@@ -3,6 +3,7 @@ Deliverables
 Team Number: 4
 
 Team Name: Dev Bytes
+Team Name: Dev Bytes
 
 Team Members:
 Hyma Jujjuru: hymajujjuru, hyma.jujjuru@colorado.edu
@@ -10,28 +11,44 @@ Apollo Hoffman: Apollo10101, kaho5265@colorado.edu
 Santana Reyes: santanareyes, santana.reyes@colorado.edu
 Michael Sexton: MichaelSexton3389, mise3389colorado.edu
 Billy Daves: wida4809, wida4809@colorado.edu
+Billy Daves: wida4809, wida4809@colorado.edu
 
 Application Name: Event Bytes
 
 Application Description:
-This application is a campus event website that displays local events happening on or near campus in Boulder. This website is intended to address the problem of finding  / being aware of things to do on campus. Our target audience is students, and the functionality is to  inform/advertise events on-campus or local events through an easy user interface, with an option to search for specific events based on filtering options.
+This application is a campus event website that displays local events happening on or near campus in Boulder. 
+This website is intended to address the problem of finding  / being aware of things to do on campus. Our target 
+audience is students, and the functionality is to  inform/advertise events on-campus or local events through an 
+easy user interface, with an option to search for specific events based on filtering options.
 
-There are 6 different user interfaces for the user to navigate through. The first is the main CU Events page, which will prompt the user to either log in or sign up for an account. Either option will lead to a pop-up menu for the user to enter their information for registering or signing in. After the user is signed in, the Upcoming Events webpage will be displayed, which will list the upcoming events happening in the general Boulder area. The user has the option to navigate to the calendar view, search page, or logout via a navigation bar at the top of the page. If the user chooses the "search" option, they will be redirected to the search page where they can enter specifc information to filter events. Once they submit this information, they will be redirected to a calendar view of upcoming events based off of the filtered options they entered. Should the user choose to navigate to the "calendar view" option of the navigation bar without entering any specific search options, the calendar view will display all the general events happening without any filtered displays. The final navigation bar option "log out" will just log the user out of the application and take them back to the main CU Events page, which will again prompt the user to log in or sign up for an account. 
+There are 6 different user interfaces for the user to navigate through. The first is the main CU Events page, which 
+will prompt the user to either log in or sign up for an account. Either option will lead to a pop-up menu for the user
+to enter their information for registering or signing in. After the user is signed in, the Upcoming Events webpage will 
+be displayed, which will list the upcoming events happening in the general Boulder area. The user has the option to 
+navigate to the calendar view, search page, or logout via a navigation bar at the top of the page. If the user chooses 
+the "search" option, they will be redirected to the search page where they can enter specifc information to filter events. 
+Once they submit this information, they will be redirected to a calendar view of upcoming events based off of the filtered 
+options they entered. Should the user choose to navigate to the "calendar view" option of the navigation bar without entering
+any specific search options, the calendar view will display all the general events happening without any filtered displays. The 
+final navigation bar option "log out" will just log the user out of the application and take them back to the main CU Events page, 
+which will again prompt the user to log in or sign up for an account. 
 
 
 Vision Statement:
-A website for the amazing residents of the city of Boulder where residents can find the events organized for them.
+A website for the amazing residents of the city of Boulder where residents can find the events organized for them.A website for the amazing residents of the city of Boulder where residents can find the events organized for them.
 
 Version Control: Github repository and folders added. 
 
+Devlopment Methodology: AGILE Methodology with Kanaban boards. 
 Devlopment Methodology: AGILE Methodology with Kanaban boards. 
 
 Communcation Plan: Discord.
 
 Meeting Plan: 
 Team Meetings - Wednesdays @5-6pm 
+Team Meetings - Wednesdays @5-6pm 
 Weekly Meetings with TA - Mondays @4:45pm 
 
 Use Case Diagram: Case Diagram with 6 key features of our application attached. 
 
-Wireframes: Wireframes of UI with 6 designs of our application pages attached. 
+Wireframes: Wireframes of UI with 6 designs of our application pages pages attached. 
