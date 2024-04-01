@@ -10,7 +10,7 @@ Santana Reyes: santanareyes, santana.reyes@colorado.edu
 
 Michael Sexton: MichaelSexton3389, mise3389@colorado.edu
 
-Billy Daves: wida4809, wida4809@coloraod.edu    
+Billy Daves: wida4809, wida4809@colorado.edu    
 
 # Study Bytes
 This application is a campus event website that displays local events happening on or near campus in Boulder. This website is intended to address the problem of finding  / being aware of things to do on campus. Our target audience is students, and the functionality is to  inform/advertise events on-campus or local events through an easy user interface, with an option to search for specific events based on filtering options.
