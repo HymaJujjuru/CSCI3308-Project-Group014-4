@@ -1,0 +1,7 @@
+Date: 4/1/24 - 16:45
+Scribe: Santana
+
+Need to be caught up to 3/4 done. Code for database, user-interface, and API needs to be ready and set up by next lab. 
+Billy and Michael will be going to office hours Tueday to look into Google Calendar API.
+Story points to be assigned and finished or started by Wednesday meeting.
+Wednesday meeting planned at Norlin at 17:00.
