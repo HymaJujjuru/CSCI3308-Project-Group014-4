@@ -152,6 +152,27 @@ const auth = (req, res, next) => {
     next();
 };
 
+app.post('/create_session', async (req, res) => {
+    //Using pages/home as a temporary render
+    courseno = db.one('SELECT Course.course_no FROM Course WHERE Course.course_name = req.body.study_class RETURNING *;');
+
+    try{
+        const insertResult = 
+        await db.any('INSERT INTO EventInfo(course_no, date, start_time, end_time, location) VALUES ($1, $2, $3, $4, $5) RETURNING *;', 
+        [courseno, req.body.study_day, req.body.study_time1, req.body.study_time2, req.body.study_location]);
+        if (insertResult) {
+            res.render('pages/home', { message: 'Study session successfully created.', error: false });
+        }
+        else {
+            res.render('pages/home', { message: 'Study session could not be created, please double check your information.', error: true });
+        }
+    }
+    catch(err){
+        console.error(err);
+        res.render('pages/home', { message: "Study session could not be created, please try again.", error: true }); 
+    }
+});
+
 app.get('/logout', (req, res) => {
     req.session.destroy();
     res.render('pages/logout');
