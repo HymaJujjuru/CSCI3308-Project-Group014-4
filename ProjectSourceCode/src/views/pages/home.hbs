@@ -1,0 +1,55 @@
+{{> message}}
+
+<div class="modal" tabindex="-1" id="event-modal">
+  <div class="modal-dialog">
+      <div class="modal-content">
+        <form method="POST" action="/create_session"> <!--Must finish /create_session to connect this form to our databases-->
+          <div class="modal-header"> <p class="modal-title">Create Study Session</p></div> 
+        </div>
+          <div class="modal-body">
+            <div> <!--Start of form inputs-->
+              <!--CLASS--> 
+              <div class="row mb-3;">
+                <label for="study_class" class="col-sm-2 col-form-label col-form-label-sm">Class:</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control form-control-sm" id="study_class" required>
+                  </div>
+              </div> 
+              <!--DAY-->
+              <div class="row mb-3">
+                <label for="study_day" class="col-sm-2 col-form-label col-form-label-sm">Day:</label>
+                <div class="col-sm-10">
+                    <input type="date" class="form-control form-control-sm" id="study_day" required>
+                </div>
+              </div>
+              <!--TIME-->
+              <div class="row mb-3">
+                <label for="study_time1" class="col-sm-2 col-form-label col-form-label-sm">Start Time:</label>
+                <div class="col-sm-10">
+                  <div class="cs-form">
+                    <input type="time" class="form-control" value="--:--" id="study_time1" required>
+                  </div>
+                </div>
+                <label for="study_time2" class="col-sm-2 col-form-label col-form-label-sm">End Time:</label>
+                <div class="col-sm-10">
+                  <div class="cs-form">
+                    <input type="time" class="form-control" value="--:--" id="study_time2" required>
+                  </div>
+                </div>
+              </div>
+              <!--LOCATION-->
+              <div class="row mb-3">
+                <label for="study_location" class="col-sm-2 col-form-label col-form-label-sm">Location:</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control form-control-sm" id="study_location" required>
+                </div>
+              </div>                            
+            </div> <!--End of form inputs-->
+          </div> <!-- End of modal-body -->
+          <div class="modal-footer">
+            <button id="submit_button" class="btn btn-primary" type="submit">Submit</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </form>
+    </div>
+</div>
