@@ -48,7 +48,17 @@
                 <div class="col-sm-10">
                   <input type="text" class="form-control form-control-sm" id="study_location" required>
                 </div>
-              </div>                            
+              </div>
+              <!--Reoccuring Status--> <!-- Need to actually test this -->
+              <div class="row mb-3">
+                <label for="study_reoccur" class="col-sm-2 col-form-label col-form-label-sm">Reoccuring?</label>
+                <div class="col-sm-10">
+                    <input type="radio" class="form-control form-control-sm" id="study_reoccur" name="reoccur" value="1" required>
+                    <label for="html">Yes</label>
+                    <input type="radio" class="form-control form-control-sm" id="study_reoccur" name="reoccur" value="0" required>
+                    <label for="html">No</label>
+                </div>
+              </div>                          
             </div> <!--End of form inputs-->
           </div> <!-- End of modal-body -->
           <div class="modal-footer">
