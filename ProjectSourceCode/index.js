@@ -17,13 +17,59 @@ const axios = require('axios'); // To make HTTP requests from our server.
 // <!-- Section 2 : Connect to DB -->
 // *****************************************************
 
-//TODO
+// create `ExpressHandlebars` instance and configure the layouts and partials dir.
+const hbs = handlebars.create({
+    extname: 'hbs',
+    layoutsDir: __dirname + '/src/views/layouts',
+    partialsDir: __dirname + '/src/views/partials',
+});
 
+// database configuration
+const dbConfig = {
+    host: 'db', // the database server
+    port: 5432, // the database port
+    database: process.env.POSTGRES_DB, // the database name
+    user: process.env.POSTGRES_USER, // the user account to connect with
+    password: process.env.POSTGRES_PASSWORD, // the password of the user account
+};
+
+const db = pgp(dbConfig);
+
+// test your database
+db.connect()
+    .then(obj => {
+        console.log('Database connection successful'); // you can view this message in the docker compose logs
+        obj.done(); // success, release the connection;
+    })
+    .catch(error => {
+        console.log('ERROR:', error.message || error);
+    });
 // *****************************************************
 // <!-- Section 3 : App Settings -->
 // *****************************************************
 
-//TODO
+app.use(express.static(__dirname + '/'));
+
+// Register `hbs` as our view engine using its bound `engine()` function.
+app.engine('hbs', hbs.engine);
+app.set('view engine', 'hbs');
+app.set('views', path.join(__dirname, 'src/views'));
+app.use(bodyParser.json()); // specify the usage of JSON for parsing request body.
+
+// initialize session variables
+app.use(
+    session({
+        secret: process.env.SESSION_SECRET,
+        saveUninitialized: false,
+        resave: false,
+    })
+);
+
+app.use(
+    bodyParser.urlencoded({
+        extended: true,
+    })
+);
 
 // *****************************************************
 // <!-- Section 4 : API Routes -->
@@ -102,30 +148,9 @@ const auth = (req, res, next) => {
     next();
 };
 
-app.post('/create_session', async (req, res) => {
-    //Need databases before this action can be completed, however code should work once uncommented
-    //Using pages/home as a temporary render
-
-/*
-    try{
-        const insertResult = 
-        await db.any('INSERT INTO sessions(class, day, start_time, end_time, location) VALUES ($1, $2, $3, $4, $5) RETURNING *;', 
-        [req.body.study_class, req.body.study_day, req.body.study_time1, req.body.study_time2, req.body.study_location]);
-
-        if (insertResult) {
-            res.render('pages/home', { message: 'Study session successfully created.', error: false });
-        }
-        else {
-            res.render('pages/home', { message: 'Study session could not be created, please try again.', error: true });
-    }
-    catch(err){
-        console.error(err);
-        res.render('pages/home', { message: "Study session could not be created, please try again.", error: true }); 
-    }
-*/
-});
-
-app.get('/logout', (req, res) => {
-    req.session.destroy();
-    res.render('pages/logout');
-  });
+// *****************************************************
+// <!-- Section 5 : Start Server-->
+// *****************************************************
+// starting the server and keeping the connection open to listen for more requests
+app.listen(3000);
+console.log('Server is listening on port 3000');
