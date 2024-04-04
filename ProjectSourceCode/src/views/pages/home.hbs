@@ -1,0 +1,39 @@
+<!-- TODO: Add the head.hbs partial here -->
+{{> head.hbs}}
+<!-- TODO: Add the nav.hbs partial here -->
+{{{body}}}
+{{> nav.hbs}}
+
+
+<!-- TODO: Add the calendar view here --> 
+<div class="container-fluid">
+  <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FDenver&bgcolor=%23795548&showPrint=0&src=Y19mZTUyOWZlZjI0MTllZGI4N2FjYTA1MDVkNmVkNmMzY2FjNWUzYjRlMzYwYjc0NDhlNTUyOGJmNTNiNDJmNjQ5QGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20&color=%23B39DDB" 
+style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+</div>
+
+<!-- TODO: Add the filter and create events button here -->
+<div class="row">
+  <div class="col-sm-6 mb-3 mb-sm-0">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Filter Calendar</h5>
+        <p class="card-text">Not seeing what you want? Filter events to your needs!</p>
+        <a href="#" class="btn btn-primary">Fitler Options</a>
+        <form method="POST" action="/filter"></form>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Create an Event</h5>
+        <p class="card-text">Create a study group session!</p>
+        <a href="#" class="btn btn-primary">Create</a>
+        <form method="POST" action="/events"></form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TODO: Add the footer.hbs partial here -->
+{{> footer.hbs}}
