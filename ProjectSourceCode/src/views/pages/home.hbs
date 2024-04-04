@@ -12,7 +12,12 @@
               <div class="row mb-3;">
                 <label for="study_class" class="col-sm-2 col-form-label col-form-label-sm">Class:</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control form-control-sm" id="study_class" required>
+                    <input list="study_class" required>
+                    <datalist id="study_class">
+                      {{#each Course}}
+                        <option value={{course_name}}>
+                      {{/each}}
+                    </datalist>
                   </div>
               </div> 
               <!--DAY-->
