@@ -6,12 +6,12 @@ services:
     expose:
       - '5432'
     volumes:
-      - CSCI3308-Project-Group014-4:/var/lib/postgresql/data
+      - group-project:/var/lib/postgresql/data
       - ./src/init_data:/docker-entrypoint-initdb.d
   web:
     image: node:lts
     user: 'node'
-    working_dir: /home/node/app
+    working_dir: /CSCI3308-Project-Group014-4/
     env_file: .env
     environment:
       - NODE_ENV=development
@@ -20,7 +20,7 @@ services:
     ports:
       - '3000:3000'
     volumes:
-      - ./:/home/node/app
+      - ./:/CSCI3308-Project-Group014-4
     command: 'npm start'
 volumes:
-  CSCI3308-Project-Group014-4:
+  group-project:
