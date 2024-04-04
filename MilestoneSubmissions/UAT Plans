@@ -1,0 +1,14 @@
+1) Create Event
+To test the "create event" feature, we will have a positive test case with entirely valid entries that should be submited to the databases.
+The environment will be the cloud.
+The test should return status 200.
+The user accepentace will be that the user is able to create an event.
+
+2) Filter Events
+To test the "filter" feature, we will have a positive test case comparing a search for study sessions for a specific class with a list of expected study sessions from that search.
+The environment will be the localhost.
+The test should return status 200.
+The user acceptance will be that the user is able to find events of a specified class and only events from that class.
+ 
+
+3) User Profile
