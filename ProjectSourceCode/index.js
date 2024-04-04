@@ -77,8 +77,9 @@ app.use(
 
 //Copied from Lab 8
 app.get('/', (req, res) => {
-    res.redirect('/login');
+    res.redirect('/home');
 });
+
 
 app.get('/login', (req, res) => {
     res.render('pages/login');
@@ -88,10 +89,11 @@ app.get('/register', (req, res) => {
     res.render('pages/register');
 });
 
-app.get('/profile', (req, res) => {
-    res.render('pages/profile');
-});
 
+app.get('/home', (req, res) => {
+      res.render('pages/home')
+  });
+  
 // Register
 app.post('/register', async (req, res) => {
     //hash the password using bcrypt library
@@ -156,5 +158,5 @@ const auth = (req, res, next) => {
 // <!-- Section 5 : Start Server-->
 // *****************************************************
 // starting the server and keeping the connection open to listen for more requests
-app.listen(3000);
+module.exports = app.listen(3000);
 console.log('Server is listening on port 3000');
