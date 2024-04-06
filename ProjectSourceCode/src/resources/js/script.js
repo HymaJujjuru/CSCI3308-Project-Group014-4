@@ -1,12 +1,17 @@
 //Code copied from Lab 4
 
-
-
 const EVENTS = [
     // Not sure if I need something here
   ];
 
 let EVENT_MODAL;
+
+//Attempts to fix "bootstrap is not defined" error: 
+
+//import * as bootstrap from '../node_modules/bootstrap/dist/js/bootstrap.esm.min.js'
+//import { Modal } from 'bootstrap'
+
+//Attempts result in a "cannot import outside a module" error
 
  // ********************** Modal Functions **************************************
 function initializeEventModal() {
@@ -15,22 +20,21 @@ function initializeEventModal() {
     EVENT_MODAL = new bootstrap.Modal(document.getElementById('create-modal'));
   }
 
-  function openEventModal({ id, date }) {
+  function openEventModal(id) { // openEventModal({ id, date })
+    EVENT_MODAL = new bootstrap.Modal(document.getElementById('create-modal')); //unable to call initializeEventModal() so this is here for now
     // Since we will be reusing the same modal for both creating and updating events,
     // we're creating variables to reference the title of the modal and the submit button
     // in javascript so we can update the text suitably
     const submit_button = document.querySelector("#submit_button");
     const modal_title = document.querySelector(".modal-title");
     // Check if the event exists in the EVENTS by using `id`
-    // Note that on the first try, when you attempt to access an event that does not exist
-    // an event will be added to the list. This is expected.
     let event = EVENTS[id];
     // If event is undefined, i.e it does not exist in the EVENTS, then we create a new event.
     // Else, we load the current event into the modal.
     if (!event) {
       event = {
         class: "",
-        date: date,
+        date: "",
         start_time: "",
         end_time: "",
         location: "",
@@ -62,7 +66,7 @@ function initializeEventModal() {
       // when the form is submitted by clicking on the "Creat/Update Event" button
       const form = document.querySelector("#create-modal form");
       form.setAttribute("action", `javascript:updateEventFromModal(${id})`);
-    EVENT_MODAL.show();
+      EVENT_MODAL.show();
   }
 
   function updateEventFromModal(id) {

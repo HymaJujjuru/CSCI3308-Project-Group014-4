@@ -13,7 +13,7 @@ style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling
 <!-- TODO: Add the filter and create events button here -->
 
 
-<div class="row">
+<div class="row" onload="initializeEventModal()">
   <div class="col-sm-6 mb-3 mb-sm-0">
     <div class="card">
       <div class="card-body">
@@ -29,7 +29,7 @@ style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling
       <div class="card-body">
         <h5 class="card-title">Create an Event</h5>
         <p class="card-text">Create a study group session!</p>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#create-modal">Create</button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#create-modal" onclick="openEventModal(0)">Create</button>
       </div>
     </div>
   </div>
