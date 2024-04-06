@@ -1,8 +1,9 @@
 {{> message}}
 
+<script src="/src/resources/js/script.js"></script> <!-- Should allow me to open modals using script.js. Currently the "open modal" bit isn't working-->
+
+
 <!-- CALENDAR -->
-
-
 <div class="container-fluid">
   <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FDenver&bgcolor=%23795548&showPrint=0&src=Y19mZTUyOWZlZjI0MTllZGI4N2FjYTA1MDVkNmVkNmMzY2FjNWUzYjRlMzYwYjc0NDhlNTUyOGJmNTNiNDJmNjQ5QGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20&color=%23B39DDB" 
 style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling="no"></iframe>
@@ -28,7 +29,7 @@ style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling
       <div class="card-body">
         <h5 class="card-title">Create an Event</h5>
         <p class="card-text">Create a study group session!</p>
-        <button class="btn btn-primary" id="create-modal">Create</button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#create-modal">Create</button>
       </div>
     </div>
   </div>
@@ -36,7 +37,7 @@ style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling
 
 
 <!-- CREATE EVENT MODAL -->
-<div class="modal" tabindex="-1" id="create-modal">
+<div class="modal fade" id="create-modal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog">
       <div class="modal-content">
         <form method="POST" action="/create_session"> <!--Must finish /create_session to connect this form to our databases-->

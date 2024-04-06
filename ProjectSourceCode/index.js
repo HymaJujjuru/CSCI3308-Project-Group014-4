@@ -143,7 +143,6 @@ app.post('/login', async (req, res) => {
 
 });
 
-/* TESTING COMMENT
 
 // Authentication Middleware.
 const auth = (req, res, next) => {
@@ -154,7 +153,6 @@ const auth = (req, res, next) => {
     next();
 };
 
-*/
 
 app.get('/home', (req, res) => {
     res.render('pages/home');
@@ -166,15 +164,15 @@ app.post('/create_session', async (req, res) => {
         event_no SERIAL PRIMARY KEY,        --
         location VARCHAR(120),              --
         date DATE NOT NULL,                 --
-        filter_no INT,
+        filter_no INT,                      What is this?
         reoccuring_status boolean NOT NULL, --
         start_time TIME NOT NULL,           --
         end_time TIME NOT NULL,             --
-        hidden_users VARCHAR(45),
+        hidden_users VARCHAR(45),           How to insert into db?
         course_no INT,                      --
-        organizer_no VARCHAR(45) NOT NULL
+        organizer_no VARCHAR(45) NOT NULL   How to insert into db?
     */
-    if(!req.body.study_reoccur)
+    if (!req.body.study_reoccur)
     {
         req.body.study_reoccur = 0;
     }
@@ -203,8 +201,6 @@ app.post('/create_session', async (req, res) => {
 app.get('/logout', (req, res) => {
     req.session.destroy();
     res.render('pages/logout');
-
-
 });
 
 // *****************************************************

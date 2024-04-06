@@ -1,17 +1,18 @@
 //Code copied from Lab 4
 
 
+
 const EVENTS = [
     // Not sure if I need something here
   ];
 
 let EVENT_MODAL;
 
- /* ********************** Modal Functions ************************************** */
+ // ********************** Modal Functions **************************************
 function initializeEventModal() {
-    // @TODO: Create a modal using JS. The id will be `event-modal`:
+    // @TODO: Create a modal using JS. The id will be `create-modal`:
     // Reference: https://getbootstrap.com/docs/5.3/components/modal/#via-javascript
-    EVENT_MODAL = new bootstrap.Modal(document.getElementById('event-modal'))
+    EVENT_MODAL = new bootstrap.Modal(document.getElementById('create-modal'));
   }
 
   function openEventModal({ id, date }) {
@@ -40,7 +41,7 @@ function initializeEventModal() {
       submit_button.innerHTML = "Create Event";
       // Allocate a new event id. Note that nothing is inserted into the CALENDAR_EVENTS yet.
       // @TODO: Set the id to be the length of the CALENDAR_EVENTS because we are adding a new element
-      id = CALENDAR_EVENTS.length;
+      id = EVENTS.length;
     } else {
       // We will default to "Update Event" as the text for the title and the submit button
       modal_title.innerHTML = "Update Event";
@@ -59,7 +60,7 @@ function initializeEventModal() {
   
       // Set the "action" event for the form to call the updateEventFromModal
       // when the form is submitted by clicking on the "Creat/Update Event" button
-      const form = document.querySelector("#event-modal form");
+      const form = document.querySelector("#create-modal form");
       form.setAttribute("action", `javascript:updateEventFromModal(${id})`);
     EVENT_MODAL.show();
   }
@@ -76,6 +77,8 @@ function initializeEventModal() {
     };
   
     // Update the dom to display the newly created event and hide the event modal
-    updateDOM();
+    //updateDOM();
     EVENT_MODAL.hide();
   }
+
+  
