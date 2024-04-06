@@ -143,6 +143,8 @@ app.post('/login', async (req, res) => {
 
 });
 
+/* TESTING COMMENT
+
 // Authentication Middleware.
 const auth = (req, res, next) => {
     if (!req.session.user) {
@@ -152,8 +154,13 @@ const auth = (req, res, next) => {
     next();
 };
 
+*/
+
+app.get('/home', (req, res) => {
+    res.render('pages/home');
+});
+
 app.post('/create_session', async (req, res) => {
-    //Using pages/home as a temporary render
     /* 
     EventInfo Database:
         event_no SERIAL PRIMARY KEY,        --
@@ -167,6 +174,12 @@ app.post('/create_session', async (req, res) => {
         course_no INT,                      --
         organizer_no VARCHAR(45) NOT NULL
     */
+    if(!req.body.study_reoccur)
+    {
+        req.body.study_reoccur = 0;
+    }
+
+
     courseno = db.one('SELECT Course.course_no FROM Course WHERE Course.course_name = req.body.study_class RETURNING *;');
 
     try{
@@ -184,12 +197,15 @@ app.post('/create_session', async (req, res) => {
         console.error(err);
         res.render('pages/home', { message: "Study session could not be created, please try again.", error: true }); 
     }
+
 });
 
 app.get('/logout', (req, res) => {
     req.session.destroy();
     res.render('pages/logout');
-  });
+
+
+});
 
 // *****************************************************
 // <!-- Section 5 : Start Server-->
