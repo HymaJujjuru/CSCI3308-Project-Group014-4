@@ -143,6 +143,7 @@ app.post('/login', async (req, res) => {
 
 });
 
+
 // Authentication Middleware.
 const auth = (req, res, next) => {
     if (!req.session.user) {
@@ -152,10 +153,55 @@ const auth = (req, res, next) => {
     next();
 };
 
+
+app.get('/home', (req, res) => {
+    res.render('pages/home');
+});
+
+app.post('/create_session', async (req, res) => {
+    /* 
+    EventInfo Database:
+        event_no SERIAL PRIMARY KEY,        --
+        location VARCHAR(120),              --
+        date DATE NOT NULL,                 --
+        filter_no INT,                      What is this?
+        reoccuring_status boolean NOT NULL, --
+        start_time TIME NOT NULL,           --
+        end_time TIME NOT NULL,             --
+        hidden_users VARCHAR(45),           How to insert into db?
+        course_no INT,                      --
+        organizer_no VARCHAR(45) NOT NULL   How to insert into db?
+    */
+    if (!req.body.study_reoccur)
+    {
+        req.body.study_reoccur = 0;
+    }
+
+
+    courseno = db.one('SELECT Course.course_no FROM Course WHERE Course.course_name = req.body.study_class RETURNING *;');
+
+    try{
+        const insertResult = 
+        await db.any('INSERT INTO EventInfo(course_no, date, start_time, end_time, location, reoccuring_status) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;', 
+        [courseno, req.body.study_day, req.body.study_time1, req.body.study_time2, req.body.study_location, req.body.study_reoccur]);
+        if (insertResult) {
+            res.render('pages/home', { message: 'Study session successfully created.', error: false });
+        }
+        else {
+            res.render('pages/home', { message: 'Study session could not be created, please try again.', error: true });
+        }
+    }
+    catch(err){
+        console.error(err);
+        res.render('pages/home', { message: "Study session could not be created, please try again.", error: true }); 
+    }
+
+});
+
 app.get('/logout', (req, res) => {
     req.session.destroy();
     res.render('pages/logout');
-  });
+});
 
 // *****************************************************
 // <!-- Section 5 : Start Server-->

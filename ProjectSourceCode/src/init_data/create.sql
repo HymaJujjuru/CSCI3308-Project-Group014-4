@@ -1,6 +1,6 @@
 
 -- Create Tables
-CREATE TABLE IF NOT EXISTS EventInfo (
+CREATE TABLE IF NOT EXISTS  EventInfo (
   event_no SERIAL PRIMARY KEY,
   location VARCHAR(120),
   date DATE NOT NULL,
@@ -14,14 +14,14 @@ CREATE TABLE IF NOT EXISTS EventInfo (
   UNIQUE (course_no)
 );
 
-CREATE TABLE IF NOT EXISTS Course (
+CREATE TABLE IF NOT EXISTS   Course (
   course_no SERIAL PRIMARY KEY,
   course_name VARCHAR(45) NOT NULL,
   EventInfo_event_no INT NOT NULL,
   FOREIGN KEY (EventInfo_event_no) REFERENCES EventInfo(event_no) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 
-CREATE TABLE IF NOT EXISTS Organizer (
+CREATE TABLE IF NOT EXISTS   Organizer (
   organizer_no SERIAL PRIMARY KEY,
   organizer_name VARCHAR(120) NOT NULL,
   event_no INT NOT NULL,
@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS Organizer (
   FOREIGN KEY (event_no) REFERENCES    EventInfo(event_no) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 
-CREATE TABLE IF NOT EXISTS Student (
+CREATE TABLE IF NOT EXISTS    Student (
   student_no SERIAL PRIMARY KEY,
   student_name VARCHAR(120) NOT NULL
 );
@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS    Organizer_has_EventInfo (
 );
 
 
-CREATE TABLE users (
+CREATE TABLE IF NOT EXISTS      users (
     username VARCHAR(50) PRIMARY KEY,
     password CHAR(60) NOT NULL
-)
+);
