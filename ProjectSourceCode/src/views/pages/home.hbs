@@ -1,12 +1,19 @@
 {{> message}}
-<!-- TODO: Add the calendar view here --> 
+
+<script src="/src/resources/js/script.js"></script> <!-- Should allow me to open modals using script.js. Currently the "open modal" bit isn't working-->
+
+
+<!-- CALENDAR -->
 <div class="container-fluid">
   <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FDenver&bgcolor=%23795548&showPrint=0&src=Y19mZTUyOWZlZjI0MTllZGI4N2FjYTA1MDVkNmVkNmMzY2FjNWUzYjRlMzYwYjc0NDhlNTUyOGJmNTNiNDJmNjQ5QGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20&color=%23B39DDB" 
 style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling="no"></iframe>
 </div>
 
+
 <!-- TODO: Add the filter and create events button here -->
-<div class="row">
+
+
+<div class="row" onload="initializeEventModal()">
   <div class="col-sm-6 mb-3 mb-sm-0">
     <div class="card">
       <div class="card-body">
@@ -22,11 +29,74 @@ style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling
       <div class="card-body">
         <h5 class="card-title">Create an Event</h5>
         <p class="card-text">Create a study group session!</p>
-        <a href="#" class="btn btn-primary">Create</a>
-        <form method="POST" action="/events"></form>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#create-modal" onclick="openEventModal(0)">Create</button>
       </div>
     </div>
   </div>
 </div>
 
 
+<!-- CREATE EVENT MODAL -->
+<div class="modal fade" id="create-modal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+        <form method="POST" action="/create_session"> <!--Must finish /create_session to connect this form to our databases-->
+          <div class="modal-header"> <p class="modal-title">Create Study Session</p></div> 
+        </div>
+          <div class="modal-body">
+            <div> <!--Start of form inputs-->
+              <!--CLASS--> 
+              <div class="row mb-3;">
+                <label for="study_class" class="col-sm-2 col-form-label col-form-label-sm">Class:</label>
+                  <div class="col-sm-10">
+                    <input list="study_class" id="study_class" required>
+                    <datalist name="study_class">
+                      {{#each Course}}
+                        <option value={{course_name}}>
+                      {{/each}}
+                    </datalist>
+                  </div>
+              </div> 
+              <!--DAY-->
+              <div class="row mb-3">
+                <label for="study_day" class="col-sm-2 col-form-label col-form-label-sm">Day:</label>
+                <div class="col-sm-10">
+                    <input type="date" class="form-control form-control-sm" id="study_day" required>
+                </div>
+              </div>
+              <!--TIME-->
+              <div class="row mb-3">
+                <label for="study_time1" class="col-sm-2 col-form-label col-form-label-sm">Start Time:</label>
+                <div class="col-sm-10">
+                  <div class="cs-form">
+                    <input type="time" class="form-control" value="00:00" id="study_time1" required>
+                  </div>
+                </div>
+                <label for="study_time2" class="col-sm-2 col-form-label col-form-label-sm">End Time:</label>
+                <div class="col-sm-10">
+                  <div class="cs-form">
+                    <input type="time" class="form-control" value="00:00" id="study_time2" required>
+                  </div>
+                </div>
+              </div>
+              <!--LOCATION-->
+              <div class="row mb-3">
+                <label for="study_location" class="col-sm-2 col-form-label col-form-label-sm">Location:</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control form-control-sm" id="study_location" required>
+                </div>
+              </div>
+              <!--Reoccuring Status--> 
+              <div class="row mb-3">
+                <label for="study_reoccur" class="col-sm-2 col-form-label col-form-label-sm">Reoccuring?</label>
+                <input type="checkbox" name="study_reoccur" id="study_reoccur" value=1>
+              </div>                          
+            </div> <!--End of form inputs-->
+          </div> <!-- End of modal-body -->
+          <div class="modal-footer">
+            <button id="submit_button" class="btn btn-primary" type="submit">Submit</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </form>
+    </div>
+</div>
