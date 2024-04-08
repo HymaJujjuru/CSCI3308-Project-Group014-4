@@ -203,6 +203,17 @@ app.get('/logout', (req, res) => {
     res.render('pages/logout');
 });
 
+app.get('/calendar', (req, res) => {
+    res.render('pages/calendar');
+});
+
+app.get('/events', (req, res) => {
+    res.render('pages/events');
+});
+
+app.get('/profile', (req, res) => {
+    res.render('pages/profile');
+});
 // *****************************************************
 // <!-- Section 5 : Start Server-->
 // *****************************************************
