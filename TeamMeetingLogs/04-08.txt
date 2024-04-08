@@ -1,0 +1,18 @@
+Date: 04/08/2024
+Scribe: Hyma Jujjuru
+Santana, Hyma, Apollo, William, and Michael were present
+
+We showed our demo, release notes, and project board.
+We were advised to include our plan as part of project board.
+Wednesday meeting planned at Norlin at 17:00.
+
+**Our plan for this week is**
+User Interface - Polish up UI for main, events, and profile pages
+Testing - Wrap up Lab 11 Material and test additional areas as needed.
+
+Tentative plans for this week
+Santana - UI for pages and profile
+Apollo - Implement modal functionality
+Hyma - Log-in/register working with databases, filter
+Billy - Working more on calendar functionality
+Michael - debugging and testing databases, filter
