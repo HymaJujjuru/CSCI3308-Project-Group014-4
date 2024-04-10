@@ -153,9 +153,38 @@ const auth = (req, res, next) => {
     next();
 };
 
+//Checks for authentication
+app.use(auth);
 
+//Home
 app.get('/home', (req, res) => {
     res.render('pages/home');
+});
+
+//Events
+app.get('/events', (req, res) => {
+    res.render('pages/events');
+});
+
+
+
+//Calendar
+app.get('/calendar', (req, res) => {
+    res.render('pages/calendar');
+});
+
+//Profile
+app.get('/profile', (req, res) => {
+    res.render('pages/profile', {
+        username: req.session.user.username,
+        first_name: req.session.user.first_name,
+        last_name: req.session.user.last_name,
+        email: req.session.user.email,
+        year: req.session.user.year,
+        major: req.session.user.major,
+        degree: req.session.user.degree,
+    });
+
 });
 
 app.post('/create_session', async (req, res) => {
@@ -200,7 +229,7 @@ app.post('/create_session', async (req, res) => {
 
 app.get('/logout', (req, res) => {
     req.session.destroy();
-    res.render('pages/logout');
+    res.render('pages/login', { message: 'Logged Out Successfully!' });
 });
 
 // *****************************************************
