@@ -12,8 +12,11 @@ style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling
 
 <!-- TODO: Add the filter and create events button here -->
 
+<script>
+  document.onload = initializeEventModal
+</script>
 
-<div class="row" onload="initializeEventModal()">
+<div class="row">
   <div class="col-sm-6 mb-3 mb-sm-0">
     <div class="card">
       <div class="card-body">
@@ -41,8 +44,10 @@ style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling
   <div class="modal-dialog">
       <div class="modal-content">
         <form method="POST" action="/create_session"> <!--Must finish /create_session to connect this form to our databases-->
-          <div class="modal-header"> <p class="modal-title">Create Study Session</p></div> 
-        </div>
+        <div class="modal-header"> 
+          <p class="modal-title">Create Study Session</p>
+        </div> 
+        
           <div class="modal-body">
             <div> <!--Start of form inputs-->
               <!--CLASS--> 
@@ -93,10 +98,12 @@ style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling
               </div>                          
             </div> <!--End of form inputs-->
           </div> <!-- End of modal-body -->
+          
           <div class="modal-footer">
-            <button id="submit_button" class="btn btn-primary" type="submit">Submit</button>
+            <button id="submit_button" class="btn btn-primary" type="submit" name="submit">Submit</button>
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           </div>
         </form>
+      </div> <!--End of Modal Content-->
     </div>
 </div>
