@@ -32,8 +32,6 @@ CREATE TABLE IF NOT EXISTS   Organizer (
 CREATE TABLE IF NOT EXISTS    Student (
   student_no SERIAL PRIMARY KEY,
   student_name VARCHAR(120) NOT NULL,
-  username VARCHAR(50) PRIMARY KEY,
-  password CHAR(60) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS    Filters (
@@ -67,4 +65,7 @@ CREATE TABLE IF NOT EXISTS    Organizer_has_EventInfo (
   FOREIGN KEY (EventInfo_event_no) REFERENCES    EventInfo(event_no) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 
-
+CREATE TABLE IN NOT EXISTS   users(
+  username VARCHAR(50) PRIMARY KEY,
+  password CHAR(60) NOT NULL
+);
