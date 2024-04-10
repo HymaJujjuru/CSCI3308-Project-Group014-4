@@ -54,4 +54,37 @@ describe('Testing Register API', () => {
       });
     });
 });
-// ********************************************************************************
+// ******************** TODO: WRITE ADDITIONAL 2 UNIT TESTCASES ********************
+
+describe('Testing Login API', () => {
+  it('positive : /login', done => {
+    chai
+      // register user
+      .request(server)
+      .post('/login')
+      .send({username: 'John', password: '2020'})
+
+
+      // check log-in credentials
+      .request(server)
+      .post('/login')
+      .send({username: 'John', password: '2020'})
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body.message).to.equals('Success');
+        done();
+      });
+  });
+
+  it('Negative : /login. Checking invalid username or password.', done => {
+  chai
+    .request(server)
+    .post('/login')
+    .send({username: 20, password: '2020'})
+    .end((err, res) => {
+      expect(res).to.have.status(400);
+      expect(res.body.message).to.equals('Invalid input');
+      done();
+    });
+  });
+});
