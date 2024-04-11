@@ -42,6 +42,8 @@ describe('Testing Register API', () => {
         });
     });
 
+    // testing invalid username
+
     it('Negative : /register. Checking invalid name', done => {
     chai
       .request(server)

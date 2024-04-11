@@ -1,1 +1,17 @@
 {{> message}}
+
+<div class="container">
+    <div class="row">
+        {{#each events}}
+        <div class="col">
+            <div class="card" id="event-card-4">
+                {{this.event_no}} <br>
+                {{this.location}} <br>
+                {{this.date}} <br>
+                <a class="btn btn-primary" href="">Book Now!</a>
+            </div>
+        </div>
+        <br>
+        {{/each}}
+    </div>
+</div>
