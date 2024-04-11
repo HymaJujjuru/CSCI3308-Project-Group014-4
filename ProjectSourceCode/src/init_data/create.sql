@@ -1,4 +1,3 @@
-
 -- Create Tables
 CREATE TABLE IF NOT EXISTS  EventInfo (
   event_no SERIAL PRIMARY KEY,
@@ -65,8 +64,7 @@ CREATE TABLE IF NOT EXISTS    Organizer_has_EventInfo (
   FOREIGN KEY (EventInfo_event_no) REFERENCES    EventInfo(event_no) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 
-
-CREATE TABLE IF NOT EXISTS      users (
-    username VARCHAR(50) PRIMARY KEY,
-    password CHAR(60) NOT NULL
+CREATE TABLE IF NOT EXISTS   users(
+  username VARCHAR(50) PRIMARY KEY,
+  password CHAR(60) NOT NULL
 );

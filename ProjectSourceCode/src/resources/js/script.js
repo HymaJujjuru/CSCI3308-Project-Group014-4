@@ -1,4 +1,4 @@
-//Code copied from Lab 4
+/* Code based on Lab 4 */
 
 const EVENTS = [
     // Not sure if I need something here
@@ -6,12 +6,6 @@ const EVENTS = [
 
 let EVENT_MODAL;
 
-//Attempts to fix "bootstrap is not defined" error: 
-
-//import * as bootstrap from '../node_modules/bootstrap/dist/js/bootstrap.esm.min.js'
-//import { Modal } from 'bootstrap'
-
-//Attempts result in a "cannot import outside a module" error
 
  // ********************** Modal Functions **************************************
 function initializeEventModal() {
@@ -21,7 +15,6 @@ function initializeEventModal() {
   }
 
   function openEventModal(id) { // openEventModal({ id, date })
-    EVENT_MODAL = new bootstrap.Modal(document.getElementById('create-modal')); //unable to call initializeEventModal() so this is here for now
     // Since we will be reusing the same modal for both creating and updating events,
     // we're creating variables to reference the title of the modal and the submit button
     // in javascript so we can update the text suitably
@@ -66,6 +59,10 @@ function initializeEventModal() {
       // when the form is submitted by clicking on the "Creat/Update Event" button
       const form = document.querySelector("#create-modal form");
       form.setAttribute("action", `javascript:updateEventFromModal(${id})`);
+      if(!EVENT_MODAL)
+      {
+        EVENT_MODAL = new bootstrap.Modal(document.getElementById('create-modal'));
+      }
       EVENT_MODAL.show();
   }
 
