@@ -1,4 +1,3 @@
-
 -- Create Tables
 CREATE TABLE IF NOT EXISTS  EventInfo (
   event_no SERIAL PRIMARY KEY,
