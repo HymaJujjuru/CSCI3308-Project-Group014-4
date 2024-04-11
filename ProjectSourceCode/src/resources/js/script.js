@@ -9,8 +9,7 @@ let EVENT_MODAL;
 
  // ********************** Modal Functions **************************************
 function initializeEventModal() {
-    // @TODO: Create a modal using JS. The id will be `create-modal`:
-    // Reference: https://getbootstrap.com/docs/5.3/components/modal/#via-javascript
+    // Create a modal using JS. The id will be `create-modal`:
     EVENT_MODAL = new bootstrap.Modal(document.getElementById('create-modal'));
   }
 
@@ -32,12 +31,11 @@ function initializeEventModal() {
         end_time: "",
         location: "",
       };
-      // @TODO: Update the innerHTML for modalTitle and submitButton
-      // Replace <> with the correct attribute
+      // Update the innerHTML for modalTitle and submitButton
       modal_title.innerHTML = "Create Event";
       submit_button.innerHTML = "Create Event";
       // Allocate a new event id. Note that nothing is inserted into the CALENDAR_EVENTS yet.
-      // @TODO: Set the id to be the length of the CALENDAR_EVENTS because we are adding a new element
+      // Set the id to be the length of the CALENDAR_EVENTS because we are adding a new element
       id = EVENTS.length;
     } else {
       // We will default to "Update Event" as the text for the title and the submit button
@@ -46,9 +44,7 @@ function initializeEventModal() {
     }
     // Once the event is fetched/created, populate the modal.
     // Use document.querySelector('<>').value to get the form elements. Replace <>
-    // Hint: If it is a new event, the fields in the modal will be empty.
     document.querySelector("#study_class").value = event.class;
-    // @TODO: Update remaining form fields of the modal with suitable values from the event.
     document.querySelector("#study_day").value = event.date;
     document.querySelector("#study_time1").value = event.start_time;
     document.querySelector("#study_time2").value = event.end_time;
@@ -67,10 +63,10 @@ function initializeEventModal() {
   }
 
   function updateEventFromModal(id) {
-    // @TODO: Pick the modal field values using document.querySelecter(<>).value,
+    // Pick the modal field values using document.querySelecter(<>).value,
     // and assign it to each field in CALENDAR_EVENTS.
     EVENTS[id] = {
-        name: document.querySelector("#event_name").value,
+        name: document.querySelector("#study_class").value,
         date: document.querySelector("#study_day").value,
         start_time: document.querySelector("#study_time1").value,
         end_time: document.querySelector("#study_time2").value,
@@ -82,4 +78,70 @@ function initializeEventModal() {
     EVENT_MODAL.hide();
   }
 
+  /***** UPDATE DOM  *****/
+  /*
+  function createEventElement(id) {
+    // @TODO: create a new div element. Use document.createElement().
+    var eventElement = document.createElement('div')
+    // Adding classes to the <div> element.
+    eventElement.classList = "event row border rounded m-1 py-1";
+    // @TODO: Set the id attribute of the eventElement to be the same as the input id.
+    // Replace <> with the correct HTML attribute
+    eventElement.id = `event-${id}`;
+    return eventElement;
+  }
   
+  function createTitleForEvent(event) {
+    var title = document.createElement('div');
+    title.classList.add('col', 'event-title');
+    title.innerHTML = event.name;
+    return title;
+  }
+
+  function updateDOM() {
+    const events = EVENTS;
+  
+    events.forEach((event, id) => {
+      // First, let's try to update the event if it already exists.
+  
+      // @TODO: Use the `id` parameter to fetch the object if it already exists.
+      // Replace <> with the appropriate variable name
+      // In templated strings, you can include variables as ${var_name}.
+      // For eg: let name = 'John';
+      // let msg = `Welcome ${name}`;
+      let eventElement = document.querySelector(`#event-${id}`);
+  
+      // if event is undefined, i.e. it doesn't exist in the CALENDAR_EVENTS array, make a new one.
+      if (eventElement === null) {
+        eventElement = createEventElement(id);
+        const title = createTitleForEvent(event);
+  
+        // @TODO: Append the title to the event element. Use .append() or .appendChild()
+        eventElement.appendChild(title)
+      } else {
+        // @TODO: Remove the old element while updating the event.
+        // Use .remove() with the eventElement to remove the eventElement.
+        eventElement.remove()
+      }
+  
+      // Add the event name
+      const title = eventElement.querySelector('div.event-title');
+      title.innerHTML = event.name;
+  
+      // Add a tooltip with more information on hover
+      // @TODO: you will add code here when you are working on for Part B.
+  
+      // @TODO: On clicking the event div, it should open the modal with the fields pre-populated.
+      // Replace "<>" with the triggering action.
+      eventElement.setAttribute('click', `openEventModal({id: ${id}})`);
+  
+      // Add the event div to the parent
+      document
+        .querySelector(`#${event.day} .event-container`)
+        .appendChild(eventElement);
+    });
+  
+    updateTooltips(); // Declare the function in the script.js. You will define this function in Part B.
+  }
+  
+  */
