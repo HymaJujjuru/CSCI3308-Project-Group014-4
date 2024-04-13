@@ -1,12 +1,11 @@
 const CALENDAR_EVENTS = [
   {
-    name: 'Running',
-    day: 'wednesday',
-    time: '09:00',
-    modality: 'in-person',
-    location: 'Boulder',
-    url: "",
-    attendees: 'Alice, Jack, Ben',
+    name: "Hyma",
+    weekday: "Wednesday",
+    date: "04/04/2024",
+    start_time: "10:00 am",
+    end_time: "12:00 pm",
+    location: "EC"
   },
 ];
 
@@ -104,50 +103,46 @@ function initializeCalendar() {
 /********************** PART B: 6.2: CREATE MODAL ****************************/
 
 function initializeEventModal() {
-  // @TODO: Create a modal using JS. The id will be `event-modal`:
+  // @TODO: Create a modal using JS. The id will be `create-modal`:
   // Reference: https://getbootstrap.com/docs/5.3/components/modal/#via-javascript
-  EVENT_MODAL = new bootstrap.Modal('#event-modal');
+  EVENT_MODAL = new bootstrap.Modal(document.getElementById('create-modal'));
 }
 
 function updateEventFromModal(id) {
   // @TODO: Pick the modal field values using document.querySelecter(<>).value,
   // and assign it to each field in CALENDAR_EVENTS.
-  CALENDAR_EVENTS[id] = {
-    name: document.querySelector('#event-name').value,
-    day: document.querySelector('#weekday').value,
-    time: document.querySelector('#event_time').value,
-    modality: document.querySelector('#modality').value,
-    location: document.querySelector('#location').value,
-    url: document.querySelector('#event_url').value,
-    attendees: document.querySelector('#attendees').value,
+  EVENTS[id] = {
+    name: document.querySelector("#event_name").value,
+    weekday: document.querySelector("#study_weekday").value,
+    date: document.querySelector("#study_day").value,
+    start_time: document.querySelector("#study_time1").value,
+    end_time: document.querySelector("#study_time2").value,
+    location: document.querySelector("#study_location").value
   };
 
   // Update the dom to display the newly created event and hide the event modal
-  updateDOM();
+  //updateDOM();
   EVENT_MODAL.hide();
 }
 
-function openEventModal({ id, day }) {
+function openEventModal(id) { // openEventModal({ id, date })
   // Since we will be reusing the same modal for both creating and updating events,
   // we're creating variables to reference the title of the modal and the submit button
   // in javascript so we can update the text suitably
   const submit_button = document.querySelector("#submit_button");
   const modal_title = document.querySelector(".modal-title");
-  // Check if the event exists in the CALENDAR_EVENTS by using `id`
-  // Note that on the first try, when you attempt to access an event that does not exist
-  // an event will be added to the list. This is expected.
-  let event = CALENDAR_EVENTS[id];
-  // If event is undefined, i.e it does not exist in the CALENDAR_EVENTS, then we create a new event.
+  // Check if the event exists in the EVENTS by using `id`
+  let event = EVENTS[id];
+  // If event is undefined, i.e it does not exist in the EVENTS, then we create a new event.
   // Else, we load the current event into the modal.
   if (!event) {
     event = {
       name: "",
-      day: day,
-      time: "",
-      modality: "",
+      weekday: "",
+      date: "",
+      start_time: "",
+      end_time: "",
       location: "",
-      url: "",
-      attendees: "",
     };
     // @TODO: Update the innerHTML for modalTitle and submitButton
     // Replace <> with the correct attribute
@@ -155,7 +150,7 @@ function openEventModal({ id, day }) {
     submit_button.innerHTML = "Create Event";
     // Allocate a new event id. Note that nothing is inserted into the CALENDAR_EVENTS yet.
     // @TODO: Set the id to be the length of the CALENDAR_EVENTS because we are adding a new element
-    id = CALENDAR_EVENTS.length;
+    id = EVENTS.length;
   } else {
     // We will default to "Update Event" as the text for the title and the submit button
     modal_title.innerHTML = "Update Event";
@@ -164,47 +159,43 @@ function openEventModal({ id, day }) {
   // Once the event is fetched/created, populate the modal.
   // Use document.querySelector('<>').value to get the form elements. Replace <>
   // Hint: If it is a new event, the fields in the modal will be empty.
-  document.querySelector("#event-name").value = event.name;
+  document.querySelector("#event_name").value = event.name;
   // @TODO: Update remaining form fields of the modal with suitable values from the event.
-  document.querySelector("#weekday").value = event.day;
-  document.querySelector("#event_time").value = event.time;
-  document.querySelector("#modality").value = event.modality;
-  document.querySelector("#location").value = event.location;
-  document.querySelector("#event_url").value = event.url;
-  document.querySelector("#attendees").value = event.attendees;
+  document.querySelector("#study_day").value = event.date;
+  document.querySelector("#study_time1").value = event.start_time;
+  document.querySelector("#study_time2").value = event.end_time;
+  document.querySelector("#study_location").value = event.location;
 
 
-  // Location options depend on the event modality
-  // @TODO: pass event.modality as an argument to the updateLocationOptions() function. Replace <> with event.modality.
-  updateLocationOptions(event.modality);
   // Set the "action" event for the form to call the updateEventFromModal
   // when the form is submitted by clicking on the "Creat/Update Event" button
-  const form = document.querySelector("#event-modal form");
+  const form = document.querySelector("#create-modal form");
   form.setAttribute("action", `javascript:updateEventFromModal(${id})`);
+  if (!EVENT_MODAL) {
+    EVENT_MODAL = new bootstrap.Modal(document.getElementById('create-modal'));
+  }
   EVENT_MODAL.show();
 }
 
 
-function updateLocationOptions(modality_value) {
-  // @TODO: get the "Location" and "Remote URL" HTML elements from the modal.
-  // Use document.querySelector() or document.getElementById().
-  const location = document.getElementById("event_location");//get the "Location" field
-  const remoteUrl = document.getElementById("event_remote_url");// get the "Remote URL" field
-  const attendees = document.getElementById("event_attendees");
+// function updateLocationOptions(modality_value) {
+//   // @TODO: get the "Location" and "Remote URL" HTML elements from the modal.
+//   // Use document.querySelector() or document.getElementById().
+//   const location = document.getElementById("event_location");//get the "Location" field
 
-  // @TODO: Depending on the "value" change the visibility style of these fields on the modal.
-  // Use conditional statements.
-  if (modality_value == "in-person") {
-    location.removeAttribute("hidden");
-    attendees.removeAttribute("hidden");
-    remoteUrl.setAttribute("hidden", "hidden");
-  }
-  else if (modality_value == "remote") {
-    remoteUrl.removeAttribute("hidden");
-    attendees.removeAttribute("hidden");
-    location.setAttribute("hidden", "hidden");
-  }
-}
+//   // @TODO: Depending on the "value" change the visibility style of these fields on the modal.
+//   // Use conditional statements.
+//   if (modality_value == "in-person") {
+//     location.removeAttribute("hidden");
+//     attendees.removeAttribute("hidden");
+//     remoteUrl.setAttribute("hidden", "hidden");
+//   }
+//   else if (modality_value == "remote") {
+//     remoteUrl.removeAttribute("hidden");
+//     attendees.removeAttribute("hidden");
+//     location.setAttribute("hidden", "hidden");
+//   }
+// }
 
 /********************** PART B: 6.3: UPDATE DOM ******************************/
 

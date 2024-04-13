@@ -1,3 +1,5 @@
+<script src="/src/resources/js/script.js"></script>
+
 <body onload="initializeCalendar()">
 <!-- Calendar elements -->
 <div class="container">
@@ -5,7 +7,7 @@
     </div>
 </div>
 <!-- Modal elements -->
-<div class="modal" tabindex="-1" id="event-modal">
+<div class="modal" tabindex="-1" id="create-modal">
     <div class="modal-dialog">
         <div class="modal-content">
             <form>
@@ -16,13 +18,13 @@
 
 
                     <div class="row mb-3">
-                        <legend style="font-size: medium;" class="col-form-label">Name</legend>
-                        <input id="event-name" name="name" type="text" class="form-control" required>
+                        <legend style="font-size: medium;" class="col-form-label">Event Name</legend>
+                        <input id="event_name" name="name" type="text" class="form-control" required>
                     </div>
 
                     <div class="row mb-3" id="event_weekday">
                         <legend style="font-size: medium;">Weekday</legend>
-                        <select id="weekday" name="weekday" class="form-select" aria-label="Default select example"
+                        <select id="study_weekday" name="weekday" class="form-select" aria-label="Default select example"
                             required>
                             <option selected></option>
                             <option value="sunday">Sunday</option>
@@ -34,41 +36,32 @@
                             <option value="saturday">Saturday</option>
                         </select>
                     </div>
+                    
+                    <div id="datepicker" class="input-group date" data-date-format="mm-dd-yyyy">
+                        <legend style="font-size: medium;">Select Date: </legend>
+                        <input class="form-control" type="text" readonly />
+                        <span class="input-group-addon">
+                            <i class="glyphicon glyphicon-calendar"></i>
+                        </span>
+                    </div>
 
                     <div class="row mb-3">
                         <div class="cs-form">
-                            <legend style="font-size: medium;">Time</legend>
-                            <input id="event_time" name="time" type="time" class="form-control">
+                            <legend style="font-size: medium;">Start Time</legend>
+                            <input id="study_time1" name="time" type="time" class="form-control">
                         </div>
                     </div>
 
-                    <div class="row mb-3" id="event_modality">
-                        <legend style="font-size: medium;">Modality</legend>
-                        <select name="modality" class="form-control" id="modality" required
-                            onchange="updateLocationOptions(this.value)">
-                            <option selected></option>
-                            <option value="in-person">In Person
-                            </option>
-                            <option value="remote">Remote</option>
-                        </select>
-
-                        <div hidden class="row mb-3" id="event_location">
-                            <legend style="font-size: medium;" class="col-form-label">Location:</legend>
-                            <input id="location" name="location" type="text" class="form-control">
+                    <div class="row mb-3">
+                        <div class="cs-form">
+                            <legend style="font-size: medium;">End Time</legend>
+                            <input id="study_time2" name="time" type="time" class="form-control">
                         </div>
+                    </div>
 
-                        <div hidden class="row mb-3" id="event_remote_url">
-                            <legend style="font-size: medium;" class="col-form-label">Remote URL:</legend>
-                            <input id="event_url" type="url" name="url" id="url" placeholder="https://"
-                                pattern="https://.*" size="50">
-                        </div>
-
-                        <div hidden class="mb-3" id="event_attendees">
-                            <legend style="font-size: medium;" class="col-form-label">Attendees:</legend>
-                            <textarea id="attendees" name="attendees" class="form-control"
-                                aria-label="With textarea"></textarea>
-                        </div>
-
+                    <div class="row mb-3" id="event_location">
+                        <legend style="font-size: medium;" class="col-form-label">Event Location:</legend>
+                        <input id="study_location" name="location" type="text" class="form-control">
                     </div>
 
                 </div>
