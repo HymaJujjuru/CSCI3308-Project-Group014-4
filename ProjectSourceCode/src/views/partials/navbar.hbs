@@ -1,4 +1,57 @@
 <header>
+    <script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
+    <script async defer src="https://accounts.google.com/gsi/client" onload="gisLoaded()"></script>
+    <script>
+        let tokenClient;
+        let gapiInited = false;
+        let gisInited = false;
+        function gapiLoaded() {
+            gapi.load('client', initializeGapiClient);
+        }
+        async function initializeGapiClient() {
+            await gapi.client.init({
+                apiKey: 'AIzaSyAVqfakhPXEU378QnEZocyrisCZ3ZhNHO4',
+                discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest'],
+            });
+            gapiInited = true;
+            maybeEnableButtons();
+        }
+        function gisLoaded() {
+            tokenClient = google.accounts.oauth2.initTokenClient({
+                client_id: '69914372338-1f5jkuep8a7bi9jstknohbjhe1if7pio.apps.googleusercontent.com',
+                scope: 'https://www.googleapis.com/auth/calendar',
+                callback: '',
+            });
+            gisInited = true;
+            maybeEnableButtons();
+        }
+        function maybeEnableButtons() {
+            if (gapiInited && gisInited) {
+                document.getElementById('authorize_button').style.visibility = 'visible';
+                document.getElementById('signout_button').style.visibility = 'hidden';  // Initially hidden
+            }
+        }
+        function handleAuthClick() {
+            tokenClient.callback = async (resp) => {
+                if (resp.error !== undefined) {
+                    throw (resp);
+                }
+                document.getElementById('signout_button').style.visibility = 'visible';
+                document.getElementById('authorize_button').style.visibility = 'hidden';
+                await listUpcomingEvents();
+            };
+            tokenClient.requestAccessToken({prompt: 'consent'});
+        }
+        function handleSignoutClick() {
+            const token = gapi.client.getToken();
+            if (token !== null) {
+                google.accounts.oauth2.revoke(token.access_token);
+                gapi.client.setToken('');
+                document.getElementById('signout_button').style.visibility = 'hidden';
+                document.getElementById('authorize_button').style.visibility = 'visible';
+            }
+        }
+    </script>
     <nav class="navbar navbar-expand-sm border-bottom">
         <div class="container">
             <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse"
@@ -24,6 +77,10 @@
                 </ul>
                 <div class="nav-item me-1">
                     <a class="nav-link" href="/logout">Logout</a>
+                </div>
+                <div class="navbar-end">
+                    <button id="authorize_button" onclick="handleAuthClick()" style="visibility: hidden;">Authorize</button>
+                    <button id="signout_button" onclick="handleSignoutClick()" style="visibility: hidden;">Sign Out</button>
                 </div>
             </div>
         </div>
