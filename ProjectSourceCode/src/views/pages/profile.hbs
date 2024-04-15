@@ -1,0 +1,167 @@
+{{> message}}
+
+<div>
+    <h1>Welcome {{username}}!</h1>
+    <table class="table">
+        <tr>
+            <th>USERNAME: {{username}}</th>
+            <td>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="New Username" aria-label="Username">
+                </div>
+            </td>
+        </tr>
+
+
+        <tr>
+            <th>YEAR: {{year}}</th>
+            <td>
+                    <!-- DROPDOWN FOR YEARS--> 
+
+                    <div class="dropdown-center">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Change Graduation Year
+                        </button>               
+                        <!-- USER INPUT FOR NEW GRADUATION YEAR-->
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">2024</a></li>
+                            <li><a class="dropdown-item" href="#">2025</a></li>
+                            <li><a class="dropdown-item" href="#">2026</a></li>
+                            <li><a class="dropdown-item" href="#">2027</a></li>
+                            <li><a class="dropdown-item" href="#">2028</a></li>
+                            <li><a class="dropdown-item" href="#">2029</a></li>
+                            <li><a class="dropdown-item" href="#">2030</a></li>
+                        </ul>
+                    </div>
+ 
+            <!-- ON SUBMIT: -->
+                <!-- GET OLD GRADUATION YEAR FROM DATABASE -->
+                <!-- DELETE THE OLD GRADUATION YEAR-->
+                <!-- INSERT NEW GRADUATION YEAR --> 
+
+            </td>
+        
+            
+
+        </tr>
+        <tr>
+            <th>AREAS OF STUDY: {{study}}</th>
+            <td>
+
+                <!-- DROPDOWN FOR AREA OF STUDY--> 
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Select Areas of Study
+                    </button>
+                    <!-- USER INPUT FOR NEW AREA OF STUDY-->
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <input class="form-check-input me-1" type="checkbox" value="" id="firstCheckbox">
+                                    <label class="form-check-label" for="firstCheckbox">Aerospace Engineering Sciences</label>
+                                </li>
+                                <li class="list-group-item">
+                                    <input class="form-check-input me-1" type="checkbox" value="" id="secondCheckbox">
+                                    <label class="form-check-label" for="secondCheckbox">Applied Mathematics</label>
+                                </li>
+                                <li class="list-group-item">
+                                    <input class="form-check-input me-1" type="checkbox" value="" id="thirdCheckbox">
+                                    <label class="form-check-label" for="thirdCheckbox">Biomedical Engineering</label>
+                                </li>
+                                <li class="list-group-item">
+                                    <input class="form-check-input me-1" type="checkbox" value="" id="fourthCheckbox">
+                                    <label class="form-check-label" for="fourthCheckbox">Chemical and Biological Engineering</label>
+                                </li>
+                                <li class="list-group-item">
+                                    <input class="form-check-input me-1" type="checkbox" value="" id="fifthCheckbox">
+                                    <label class="form-check-label" for="fifthCheckbox">Civil, Environmental and Architectural Engineering</label>
+                                </li>
+                                <li class="list-group-item">
+                                    <input class="form-check-input me-1" type="checkbox" value="" id="sixthCheckbox">
+                                    <label class="form-check-label" for="sixthCheckbox">Computer Science</label>
+                                </li>
+                                <li class="list-group-item">
+                                    <input class="form-check-input me-1" type="checkbox" value="" id="seventhCheckbox">
+                                    <label class="form-check-label" for="seventhCheckbox">Creative Technology and Design</label>
+                                </li>
+                                <li class="list-group-item">
+                                    <input class="form-check-input me-1" type="checkbox" value="" id="eighthCheckbox">
+                                    <label class="form-check-label" for="eighthCheckbox">Electrical, Computer and Energy Engineering</label>
+                                </li>
+                                <li class="list-group-item">
+                                    <input class="form-check-input me-1" type="checkbox" value="" id="ninthCheckbox">
+                                    <label class="form-check-label" for="ninthCheckbox">Engineering and Applied Science</label>
+                                </li>
+                                <li class="list-group-item">
+                                    <input class="form-check-input me-1" type="checkbox" value="" id="tenthCheckbox">
+                                    <label class="form-check-label" for="tenthCheckbox">Engineering Management</label>
+                                </li>
+                                <li class="list-group-item">
+                                    <input class="form-check-input me-1" type="checkbox" value="" id="eleventhCheckbox">
+                                    <label class="form-check-label" for="eleventhCheckbox">Engineering Physics</label>
+                                </li>
+                                <li class="list-group-item">
+                                    <input class="form-check-input me-1" type="checkbox" value="" id="twelthCheckbox">
+                                    <label class="form-check-label" for="twelthCheckbox">Engineering, Ethics and Society</label>
+                                </li>
+                                <li class="list-group-item">
+                                    <input class="form-check-input me-1" type="checkbox" value="" id="thirteenthCheckbox">
+                                    <label class="form-check-label" for="thirteenthCheckbox">Integrated Design Engineering</label>
+                                </li>
+                                <li class="list-group-item">
+                                    <input class="form-check-input me-1" type="checkbox" value="" id="fourteenthCheckbox">
+                                    <label class="form-check-label" for="fourteenthCheckbox">Materials Science and Engineering</label>
+                                </li>
+                                <li class="list-group-item">
+                                    <input class="form-check-input me-1" type="checkbox" value="" id="fifthteenthCheckbox">
+                                    <label class="form-check-label" for="fifthteenthCheckbox">Mechanical Engineering</label>
+                                </li>
+                            </ul>
+                        </a></li>
+
+                    </ul>
+                    </div>
+            </td>
+    
+            <!-- ON SUBMIT: -->
+                <!-- GET OLD MAJOR FROM DATABASE -->
+                <!-- DELETE THE OLD MAJOR-->
+                <!-- INSERT NEW MAJOR --> 
+
+        </tr>
+        <tr>
+            <th>DEGREE: {{degree}}</th>
+            <td>
+             <!-- DROPDOWN FOR DEGREE--> 
+                 <div class="dropdown-center">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Change Degree
+                        </button>
+                         <!-- USER INPUT FOR NEW DEGREE-->
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Associate Degree</a></li>
+                            <li><a class="dropdown-item" href="#">Bachelor Degree</a></li>
+                            <li><a class="dropdown-item" href="#">Doctorate Degree</a></li>
+                        </ul>
+                    </div>
+            </td>
+           
+            <!-- ON SUBMIT: -->
+                <!-- GET OLD DEGREE FROM DATABASE -->
+                <!-- DELETE THE OLD DEGREE-->
+                <!-- INSERT NEW DEGREE --> 
+
+        </tr>
+    </table>
+
+    <!-- USER SPECIFIC EVENTS -->
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">busy</h5>
+            <h6 class="card-subtitle mb-2 text-body-secondary">Event</h6>
+            <p class="card-text">When: Wed, April 17, 4:45pm – 6:15pm</p>
+        </div>
+    </div>
+
+</div>
