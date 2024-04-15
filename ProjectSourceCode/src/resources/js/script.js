@@ -1,11 +1,11 @@
 const CALENDAR_EVENTS = [
   {
-    name: "Hyma",
-    weekday: "Wednesday",
-    date: "04/04/2024",
-    start_time: "10:00 am",
-    end_time: "12:00 pm",
-    location: "EC"
+    name: 'Hyma',
+    weekday: 'wednesday',
+    date: '04/04/2024',
+    start_time: '10:00 am',
+    end_time: '12:00 pm',
+    location: 'EC'
   },
 ];
 
@@ -49,7 +49,7 @@ function createEventIcon(card) {
   // @TODO: Use `document.createElement()` function to add a "create an event" icon button to the card
   const icon = document.createElement('i');
   icon.className =
-    'bi bi-calendar-plus btn position-absolute translate-middle start-100  rounded p-0 btn-link';
+    'bi bi-calendar-plus btn position-absolute translate-middle start-100 rounded p-0 btn-link';
 
   // adding an event listener to the click event of the icon to open the modal
   // the below line of code would be the equivalent of:
@@ -96,7 +96,7 @@ function initializeCalendar() {
   });
 
   // @TODO: Uncomment this after you implement the updateDOM() function
-  // updateDOM();
+  updateDOM();
 }
 // end of initializeCalendar()
 
@@ -161,6 +161,7 @@ function openEventModal(id) { // openEventModal({ id, date })
   // Hint: If it is a new event, the fields in the modal will be empty.
   document.querySelector("#event_name").value = event.name;
   // @TODO: Update remaining form fields of the modal with suitable values from the event.
+  document.querySelector("#study_weekday").value = event.weekday;
   document.querySelector("#study_day").value = event.date;
   document.querySelector("#study_time1").value = event.start_time;
   document.querySelector("#study_time2").value = event.end_time;
@@ -212,7 +213,7 @@ function createEventElement(id) {
 
 function createTitleForEvent(event) {
   var title = document.createElement('div');
-  title.classList.add('col', 'event-title');
+  // title.classList.add('col', 'event-title');
   title.innerHTML = event.name;
   return title;
 }
@@ -250,7 +251,7 @@ function updateDOM() {
     // Add a tooltip with more information on hover
     // @TODO: you will add code here when you are working on for Part C.
     eventElement.setAttribute('data-bs-toggle', 'tooltip');
-    eventElement.setAttribute('data-bs-title', `${event.name}, ${event.time}, ${event.location}`);
+    eventElement.setAttribute('data-bs-title', `${event.name}, ${event.weekday}, ${event.date}, ${event.start_time},${event.end_time}, ${event.location}`);
 
 
     // @TODO: On clicking the event div, it should open the modal with the fields pre-populated.
