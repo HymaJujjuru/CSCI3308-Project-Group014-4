@@ -170,8 +170,15 @@ app.get('/home', (req, res) => {
 });
 
 //Events
-app.get('/events', (req, res) => {
-    res.render('pages/events',);
+app.get('/events', async(req, res) => {
+    try{
+        const response = await db.any('SELECT * FROM COURSES;');
+
+        res.render('pages/events', response);
+    }catch(err){
+        console.log(err);
+        res.render('pages/events', {message: "No Events Upcoming!!"});
+    }
 });
 
 //Calendar
