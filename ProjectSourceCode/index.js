@@ -171,10 +171,8 @@ app.get('/home', (req, res) => {
 
 //Events
 app.get('/events', (req, res) => {
-    res.render('pages/events');
+    res.render('pages/events',);
 });
-
-
 
 //Calendar
 app.get('/calendar', (req, res) => {
@@ -244,13 +242,6 @@ app.get('/calendar', (req, res) => {
     res.render('pages/calendar');
 });
 
-app.get('/events', (req, res) => {
-    res.render('pages/events');
-});
-
-app.get('/profile', (req, res) => {
-    res.render('pages/profile');
-});
 // *****************************************************
 // <!-- Section 5 : Start Server-->
 // *****************************************************
