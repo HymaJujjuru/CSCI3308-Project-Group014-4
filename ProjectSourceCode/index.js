@@ -33,7 +33,15 @@ const dbConfig = {
     password: process.env.POSTGRES_PASSWORD, // the password of the user account
 };
 
-const db = pgp(dbConfig);
+const proddbConfig = {
+    host: process.env.host, // the database server
+    port: 5432, // the database port
+    database: process.env.database, // the database name
+    user: process.env.user, // the user account to connect with
+    password: process.env.password, // the password of the user account
+};
+
+const db = pgp(proddbConfig);
 
 // test your database
 db.connect()
