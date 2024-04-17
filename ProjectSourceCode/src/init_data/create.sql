@@ -15,9 +15,8 @@ CREATE TABLE IF NOT EXISTS  EventInfo (
 
 CREATE TABLE IF NOT EXISTS   Course (
   course_no SERIAL PRIMARY KEY,
-  course_name VARCHAR(45) NOT NULL,
-  EventInfo_event_no INT NOT NULL,
-  FOREIGN KEY (EventInfo_event_no) REFERENCES EventInfo(event_no) ON DELETE NO ACTION ON UPDATE NO ACTION
+  course_name VARCHAR(200) NOT NULL,
+  course_code VARCHAR(4) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS   Organizer (
@@ -35,9 +34,7 @@ CREATE TABLE IF NOT EXISTS    Student (
 
 CREATE TABLE IF NOT EXISTS    Filters (
   filter_no SERIAL PRIMARY KEY,
-  filter_name VARCHAR(45) NOT NULL,
-  EventInfo_event_no INT NOT NULL,
-  FOREIGN KEY (EventInfo_event_no) REFERENCES    EventInfo(event_no) ON DELETE NO ACTION ON UPDATE NO ACTION
+  filter_name VARCHAR(45) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS    Organizer_has_Student (
