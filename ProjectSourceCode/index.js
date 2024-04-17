@@ -172,9 +172,21 @@ app.get('/home', (req, res) => {
 //Events
 app.get('/events', async(req, res) => {
     try{
-        const response = await db.any('SELECT * FROM COURSES;');
+        const response = 'SELECT * FROM Course';
+        let courses = [];
 
-        res.render('pages/events', response);
+        db.all(response, [], (err, rows) => {
+            if (err) {
+                throw err;
+            }
+            rows.forEach((row) => {
+                console.log(response.course_name);
+                courses.push(row);
+            });
+        });
+
+        res.render('pages/events', courses);
+        
     }catch(err){
         console.log(err);
         res.render('pages/events', {message: "No Events Upcoming!!"});
