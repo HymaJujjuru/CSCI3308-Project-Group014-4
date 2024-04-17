@@ -38,7 +38,6 @@
                 }
                 document.getElementById('signout_button').style.visibility = 'visible';
                 document.getElementById('authorize_button').style.visibility = 'hidden';
-                await listUpcomingEvents();
             };
             tokenClient.requestAccessToken({prompt: 'consent'});
         }
