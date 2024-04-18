@@ -1,8 +1,8 @@
 {{> message}}
 
 <div class="container">
+    {{#each courses}}
     <div class="row">
-        {{#each courses}}
         <div class="col">
             <div class="card" id="event-card-4">
                 Event Name: {{this.course_name}} <br>
@@ -11,10 +11,14 @@
                 Start Time: {{this.start_time}} <br>
                 End Time: {{this.end_time}} <br>
                 Location: {{this.location}} <br> --}}
-                <a class="btn btn-primary" href="">Book Now!</a>
+                
             </div>
         </div>
+        <div class="col">
+            <a class="btn btn-primary" href="">Book Now!</a>
+        </div>
         <br>
-        {{/each}}
     </div>
+    
+    {{/each}}
 </div>

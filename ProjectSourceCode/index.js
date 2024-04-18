@@ -172,20 +172,20 @@ app.get('/home', (req, res) => {
 //Events
 app.get('/events', async(req, res) => {
     try{
-        const response = 'SELECT * FROM Course';
-        let courses = [];
+        const response = `SELECT * FROM Course;`;
 
-        db.all(response, [], (err, rows) => {
-            if (err) {
-                throw err;
-            }
-            rows.forEach((row) => {
-                console.log(response.course_name);
-                courses.push(row);
+        db.any(response)
+            .then(courses => {
+                console.log(courses)
+                res.render('pages/events', {courses});
+            })
+            .catch(err => {
+                res.render('pages/events', {
+                    courses: [],
+                    error: true,
+                    message: err.message,
+                });
             });
-        });
-
-        res.render('pages/events', courses);
         
     }catch(err){
         console.log(err);
