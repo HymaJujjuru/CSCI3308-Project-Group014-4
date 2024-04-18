@@ -1,13 +1,3 @@
-INSERT INTO Filters(
-    filter_no,
-    filter_name
-) VALUES 
-
-    (1,'Location'),
-    (2,'Small Group'),
-    (3,'Reoccuring'),
-    (4,'TA Available');
-
 INSERT INTO Course(
     course_no,
     course_code,
@@ -166,4 +156,51 @@ VALUES
 (5839, 'CSCI', 'User-Centered Design and Development 1'),
 (5849, 'CSCI', 'Input, Interaction, and Accessibility'),
 (5854, 'CSCI', 'Theoretical Foundations of Autonomous Systems'),
-(5880, 'CSCI', 'Interactive Machine Learning for Customizable and Expressive Interfaces')
+(5880, 'CSCI', 'Interactive Machine Learning for Customizable and Expressive Interfaces');
+
+INSERT INTO EventInfo (
+  event_no,
+  location,
+  date,
+  reoccuring_status,
+  start_time,
+  end_time,
+  hidden_users,
+  course_no
+) 
+VALUES 
+(4,'Folsom','04-14-2020','1','11:30','12:30','0',2400),
+(2,'Stable','12-25-2000','0','24:00','01:00','1',2827),
+(3,'Norlin','01-01-2024','0','15:00','16:00','1',3022);
+
+INSERT INTO Student (
+    student_no,
+    student_name
+)
+VALUES 
+    (1,'Jimmy'),
+    (2,'Johnny'),
+    (3,'Jack'),
+    (4,'Jason'),
+    (5,'Jennifer'),
+    (6,'Jessica'),
+    (7,'Julia')
+;
+
+
+INSERT INTO Student_has_EventInfo (
+  student_no,
+  event_no
+) VALUES 
+    (3,2),
+    (3,3),
+    (3,4);
+
+INSERT INTO users(
+    username,
+    password
+) VALUES
+('admin','admin');
+
+
+
