@@ -170,8 +170,27 @@ app.get('/home', (req, res) => {
 });
 
 //Events
-app.get('/events', (req, res) => {
-    res.render('pages/events',);
+app.get('/events', async(req, res) => {
+    try{
+        const response = `SELECT * FROM Course;`;
+
+        db.any(response)
+            .then(courses => {
+                console.log(courses)
+                res.render('pages/events', {courses});
+            })
+            .catch(err => {
+                res.render('pages/events', {
+                    courses: [],
+                    error: true,
+                    message: err.message,
+                });
+            });
+        
+    }catch(err){
+        console.log(err);
+        res.render('pages/events', {message: "No Events Upcoming!!"});
+    }
 });
 
 //Calendar
