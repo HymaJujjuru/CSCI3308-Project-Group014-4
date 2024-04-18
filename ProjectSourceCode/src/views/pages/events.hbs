@@ -1,21 +1,19 @@
 {{> message}}
 
 <div class="container">
-    {{#each courses}}
+    {{#each events}}
     <div class="row">
         <div class="col">
             <div class="card" id="event-card-4">
-                Event Name: {{this.course_name}} <br>
-                {{!-- Weekday: {{this.weekday}} <br>
+                Event Name: Study Session for CSCI {{this.course_no}} <br>
                 Date: {{this.date}} <br>
                 Start Time: {{this.start_time}} <br>
                 End Time: {{this.end_time}} <br>
-                Location: {{this.location}} <br> --}}
-                
+                Location: {{this.location}} <br>
             </div>
         </div>
         <div class="col">
-            <a class="btn btn-primary" href="">Book Now!</a>
+            <a class="btn btn-primary" href="">Add to your Calendar!</a>
         </div>
         <br>
     </div>

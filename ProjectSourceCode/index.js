@@ -172,16 +172,16 @@ app.get('/home', (req, res) => {
 //Events
 app.get('/events', async(req, res) => {
     try{
-        const response = `SELECT * FROM Course;`;
+        const response = `SELECT * FROM EventInfo;`;
 
         db.any(response)
-            .then(courses => {
-                console.log(courses)
-                res.render('pages/events', {courses});
+            .then(events => {
+                console.log(events);
+                res.render('pages/events', { events });
             })
             .catch(err => {
                 res.render('pages/events', {
-                    courses: [],
+                    events: [],
                     error: true,
                     message: err.message,
                 });
