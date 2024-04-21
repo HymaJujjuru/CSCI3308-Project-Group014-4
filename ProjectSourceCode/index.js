@@ -13,6 +13,8 @@ const session = require('express-session'); // To set the session object. To sto
 const bcrypt = require('bcrypt'); //  To hash passwords
 const axios = require('axios'); // To make HTTP requests from our server.
 
+Handlebars.registerHelper('dateFormat', require('handlebars-dateformat'));
+
 // *****************************************************
 // <!-- Section 2 : Connect to DB -->
 // *****************************************************
@@ -228,26 +230,26 @@ app.post('/create_session', async (req, res) => {
     */
     if (!req.body.study_reoccur)
     {
-        req.body.study_reoccur = 0;
+        req.body.study_reoccur = false;
     }
 
-
-    courseno = db.one('SELECT Course.course_no FROM Course WHERE Course.course_name = req.body.study_class RETURNING *;');
+    let strArr = req.body.study_class.split(" ");
+    courseno = strArr[1];
+    var event_no = await db.one("SELECT COUNT(*) as total FROM EventInfo;");
 
     try{
         const insertResult = 
-        await db.any('INSERT INTO EventInfo(course_no, date, start_time, end_time, location, reoccuring_status) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;', 
-        [courseno, req.body.study_day, req.body.study_time1, req.body.study_time2, req.body.study_location, req.body.study_reoccur]);
-        if (insertResult) {
-            res.render('pages/home', { message: 'Study session successfully created.', error: false });
-        }
-        else {
-            res.render('pages/home', { message: 'Study session could not be created, please try again.', error: true });
-        }
+            await db.any(`INSERT INTO EventInfo(event_no, location, date, reoccuring_status, start_time, end_time, hidden_users, course_no) VALUES ($1, $2, $3, $4, $5, $6, $7, $8);`, 
+                [(event_no.total) + 1, req.body.study_location, req.body.study_day, req.body.study_reoccur, req.body.study_time1, req.body.study_time2, null, courseno])
+        .then(data =>{
+            res.render('pages/events', { message: 'Study session successfully created.', error: false });
+        }).catch(err => {
+            res.render('pages/events', { message: 'Study session could not be created, please try again.', error: true });
+        });
     }
     catch(err){
         console.error(err);
-        res.render('pages/home', { message: "Study session could not be created, please try again.", error: true }); 
+        res.render('pages/events', { message: "Study session could not be created, please try again.", error: true }); 
     }
 
 });
