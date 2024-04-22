@@ -228,7 +228,7 @@ app.post('/profile_username', async (req, res) => {
 
     try{
       
-        const updateUsername = await db.any('UPDATE users(username) VALUES ($1)', [req.body.event_username]);
+        const updateUsername = await db.any('UPDATE users SET username = ($1);', [req.body.event_username]);
         if (updateUsername){
             res.render('pages/profile', { message: 'Profile username successfully updated.', error: false });
         }
@@ -251,7 +251,7 @@ app.post('/profile_year', async (req, res) => {
         );
     */
     try{   
-        const updateYear = await db.any('UPDATE users(year) VALUES ($1)', [req.body.event_year]);
+        const updateYear = await db.any('UPDATE users SET year = ($1);', [req.body.event_year]);
         if (updateYear)
         {
             res.render('pages/profile', { message: 'Profile year successfully updated.', error: false });
@@ -278,9 +278,9 @@ app.post('/profile_major', async (req, res) => {
 
     try{
         // update major
-        const updateMajor = await db.any('UPDATE users(major) VALUES ($1)', [req.body.event_majors]);
-        if (updateMajor)
-        {
+        const user = await db.one(`SELECT * FROM users WHERE username = $1;`, [req.body.username]);
+        if(user){
+            const updateMajor = await db.any('UPDATE users SET major = ($1);', [req.body.event_majors]);
             res.render('pages/profile', { message: 'Profile major successfully updated.', error: false });
         }
     }
@@ -305,7 +305,7 @@ app.post('/profile_degree', async (req, res) => {
 
 
     try{
-            const updateDegree = await db.any('UPDATE users(degree) VALUES ($1)', [req.body.event_degrees]);
+            const updateDegree = await db.any('UPDATE users SET degree = ($1);', [req.body.event_degrees]);
             if (updateDegree)
             {
                 res.render('pages/profile', { message: 'Profile degree successfully updated.', error: false });
