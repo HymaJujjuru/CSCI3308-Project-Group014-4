@@ -27,9 +27,67 @@
             <div class="card-body">
                 <h5 class="card-title">Filter Calendar</h5>
                 <p class="card-text">Not seeing what you want? Filter events to your needs!</p>
-                <a href="#" class="btn btn-primary">Fitler Options</a>
-                <form method="POST" action="/filter"></form>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#filtermodal"
+                    >Filter Options</button>
+                <form method="GET" action="/filter_events"></form>
             </div>
+        </div>
+    </div>
+    <div class="modal fade" role="dialog" id="filtermodal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form method="GET" action="/filter_events">
+                    
+                    <div class="modal-header">
+                        <p class="modal-title">Filter Options</p>
+                    </div>
+    
+                    <div class="modal-body">
+                        <div> <!--Start of form inputs-->
+                            <!--CLASS-->
+                            <div class="row mb-3;">
+                                <label for="study_class" class="col-sm-2 col-form-label col-form-label-sm">Class:</label>
+                                <div class="col-sm-10">
+                                    <input list="study_class" id="course_no" name="course_no" style="width: 100%;" >
+                                </div>
+                            </div>
+                            <!--DAY-->
+                            <div class="row mb-3">
+                                <label for="study_day" name="study_day" class="col-sm-2 col-form-label col-form-label-sm" >Start Date:</label>
+                                <div class="col-sm-10">
+                                    <input type="date" class="form-control form-control-sm" name="day_range_start" id="day_range_start">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="study_day" name="study_day" class="col-sm-2 col-form-label col-form-label-sm">End Date:</label>
+                                <div class="col-sm-10">
+                                    <input type="date" class="form-control form-control-sm" name="day_range_end" id="day_range_end">
+                                </div>
+                            </div>
+                            <!--LOCATION-->
+                            <div class="row mb-3">
+                                <label for="study_location" name="study_location"
+                                    class="col-sm-2 col-form-label col-form-label-sm">Location:</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control form-control-sm" id="location_filter" name="location_filter">
+                                </div>
+                            </div>
+                            <!--Reoccuring Status-->
+                            <div class="row mb-3">
+                                <p>Do you want the session to be reoccuring?</p>
+                                <input type="checkbox" name="reoccuring_status" id="reoccuring_status" value=true>
+                            </div>
+                        </div> <!--End of form inputs-->
+                    </div> <!-- End of modal-body -->
+    
+                    <div class="modal-footer">
+                        <form method="dialog">
+                            <button id="submit_button" class="btn btn-primary" type="submit" name="submit">Submit</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </form>
+                    </div>
+                </form>
+            </div> <!--End of Modal Content-->
         </div>
     </div>
 
