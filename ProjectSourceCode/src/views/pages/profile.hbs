@@ -10,8 +10,8 @@
             <td>
                 <div class="row mb-3" id="event_username"></div>
                     <form method="POST" action="/profile_username">
-                        <label for="event_username">Change username:</label>
-                        <input type="text" id="event_username" name="username" value="">
+                        <label for="event_username" name="event_username">Change username:</label>
+                        <input type="text" id="event_username" name="event_username">
                         <input type="submit">
                     </form> 
                 </div>
@@ -27,13 +27,13 @@
                             <label for="event_year">Change graduation year:</label>
                             <select id="event_year" name="event_year">
                                  <option selected></option>
-                                    <option value="1">2024</option>
-                                    <option value="2">2025</option>
-                                    <option value="3">2026</option>
-                                    <option value="4">2027</option>
-                                    <option value="5">2028</option>
-                                    <option value="6">2029</option>
-                                    <option value="7">2030</option>
+                                    <option value="2024">2024</option>
+                                    <option value="2025">2025</option>
+                                    <option value="2026">2026</option>
+                                    <option value="2027">2027</option>
+                                    <option value="2028">2028</option>
+                                    <option value="2029">2029</option>
+                                    <option value="2030">2030</option>
                             <input type="submit">
                         </form>
                             
@@ -56,25 +56,25 @@
                 
                  <!-- USER INPUT FOR NEW GRADUATION YEAR-->
                     <form method="POST" action="/profile_major">
-                            <label for="event_study">Select areas of study:</label>
-                            <select id="event_study" name="event_study">
+                            <label for="event_major">Select areas of study:</label>
+                            <select id="event_major" name="event_major">
                                 <option selected></option>
                                     <option selected></option>
-                                    <option value="1">Aerospace Engineering Sciences</option>
-                                    <option value="2">Applied Mathematics</option>
-                                    <option value="3">Biomedical Engineering</option>
-                                    <option value="4">Chemical and Biological Engineering</option>
-                                    <option value="5">Civil, Environmental and Architectural Engineering</option>
-                                    <option value="6">Computer Science</option>
-                                    <option value="7">Creative Technology and Design</option>
-                                    <option value="8">Electrical, Computer and Energy Engineering</option>
-                                    <option value="9">Engineering and Applied Science</option>
-                                    <option value="10">Engineering Management</option>
-                                    <option value="11">Engineering Physics</option>
-                                    <option value="12">Engineering, Ethics and Society</option>
-                                    <option value="13">Integrated Design Engineering</option>
-                                    <option value="14">Materials Science and Engineering</option>
-                                    <option value="15">Mechanical Engineering</option>
+                                    <option value="Aerospace Engineering Sciences">Aerospace Engineering Sciences</option>
+                                    <option value="Applied Mathematics">Applied Mathematics</option>
+                                    <option value="Biomedical Engineering">Biomedical Engineering</option>
+                                    <option value="Chemical and Biological Engineering">Chemical and Biological Engineering</option>
+                                    <option value="Civil, Environmental and Architectural Engineering">Civil, Environmental and Architectural Engineering</option>
+                                    <option value="Computer Science">Computer Science</option>
+                                    <option value="Creative Technology and Design">Creative Technology and Design</option>
+                                    <option value="Electrical, Computer and Energy Engineering">Electrical, Computer and Energy Engineering</option>
+                                    <option value="Engineering and Applied Science">Engineering and Applied Science</option>
+                                    <option value="Engineering Management">Engineering Management</option>
+                                    <option value="Engineering Physics">Engineering Physics</option>
+                                    <option value="Engineering, Ethics and Society">Engineering, Ethics and Society</option>
+                                    <option value="Integrated Design Engineering">Integrated Design Engineering</option>
+                                    <option value="Materials Science and Engineering">Materials Science and Engineering</option>
+                                    <option value="Mechanical Engineering">Mechanical Engineering</option>
                             <input type="submit">
                     </form>
             </td>
@@ -93,9 +93,9 @@
                             <label for="degrees">Select degree type:</label>
                             <select id="event_degrees" name="event_degrees">
                                 <option selected></option>
-                                <option value="1">Associate Degree</option>
-                                <option value="2">Bachelor Degree</option>
-                                <option value="3">Doctorate Degree</option>
+                                <option value="Associate Degree">Associate Degree</option>
+                                <option value="Bachelor Degree">Bachelor Degree</option>
+                                <option value="Doctorate Degree">Doctorate Degree</option>
                             </select>
                             <input type="submit">
                     </form>
