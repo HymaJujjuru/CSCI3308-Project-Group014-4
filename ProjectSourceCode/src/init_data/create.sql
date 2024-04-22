@@ -31,5 +31,9 @@ CREATE TABLE IF NOT EXISTS    Student_has_EventInfo (
 
 CREATE TABLE IF NOT EXISTS   users(
   username VARCHAR(50) PRIMARY KEY,
-  password CHAR(60) NOT NULL
+  password CHAR(60) NOT NULL,
+  major VARCHAR(50),
+  year VARCHAR(50),
+  degree VARCHAR(50)
+
 );

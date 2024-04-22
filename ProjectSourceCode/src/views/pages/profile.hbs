@@ -2,12 +2,18 @@
 
 <div>
     <h1>Welcome {{username}}!</h1>
+
+
     <table class="table">
         <tr>
             <th>USERNAME: {{username}}</th>
             <td>
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="New Username" aria-label="Username">
+                <div class="row mb-3" id="event_username"></div>
+                    <form method="POST" action="/profile_username">
+                        <label for="event_username" name="event_username">Change username:</label>
+                        <input type="text" id="event_username" name="event_username">
+                        <input type="submit">
+                    </form> 
                 </div>
             </td>
         </tr>
@@ -17,22 +23,20 @@
             <th>YEAR: {{year}}</th>
             <td>
                     <!-- DROPDOWN FOR YEARS--> 
-
-                    <div class="dropdown-center">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Change Graduation Year
-                        </button>               
-                        <!-- USER INPUT FOR NEW GRADUATION YEAR-->
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">2024</a></li>
-                            <li><a class="dropdown-item" href="#">2025</a></li>
-                            <li><a class="dropdown-item" href="#">2026</a></li>
-                            <li><a class="dropdown-item" href="#">2027</a></li>
-                            <li><a class="dropdown-item" href="#">2028</a></li>
-                            <li><a class="dropdown-item" href="#">2029</a></li>
-                            <li><a class="dropdown-item" href="#">2030</a></li>
-                        </ul>
-                    </div>
+                        <form method="POST" action="/profile_year">
+                            <label for="event_year">Change graduation year:</label>
+                            <select id="event_year" name="event_year">
+                                 <option selected></option>
+                                    <option value="2024">2024</option>
+                                    <option value="2025">2025</option>
+                                    <option value="2026">2026</option>
+                                    <option value="2027">2027</option>
+                                    <option value="2028">2028</option>
+                                    <option value="2029">2029</option>
+                                    <option value="2030">2030</option>
+                            <input type="submit">
+                        </form>
+                            
  
             <!-- ON SUBMIT: -->
                 <!-- GET OLD GRADUATION YEAR FROM DATABASE -->
@@ -49,79 +53,30 @@
             <td>
 
                 <!-- DROPDOWN FOR AREA OF STUDY--> 
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Select Areas of Study
-                    </button>
-                    <!-- USER INPUT FOR NEW AREA OF STUDY-->
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">
-                            <ul class="list-group">
-                                <li class="list-group-item">
-                                    <input class="form-check-input me-1" type="checkbox" value="" id="firstCheckbox">
-                                    <label class="form-check-label" for="firstCheckbox">Aerospace Engineering Sciences</label>
-                                </li>
-                                <li class="list-group-item">
-                                    <input class="form-check-input me-1" type="checkbox" value="" id="secondCheckbox">
-                                    <label class="form-check-label" for="secondCheckbox">Applied Mathematics</label>
-                                </li>
-                                <li class="list-group-item">
-                                    <input class="form-check-input me-1" type="checkbox" value="" id="thirdCheckbox">
-                                    <label class="form-check-label" for="thirdCheckbox">Biomedical Engineering</label>
-                                </li>
-                                <li class="list-group-item">
-                                    <input class="form-check-input me-1" type="checkbox" value="" id="fourthCheckbox">
-                                    <label class="form-check-label" for="fourthCheckbox">Chemical and Biological Engineering</label>
-                                </li>
-                                <li class="list-group-item">
-                                    <input class="form-check-input me-1" type="checkbox" value="" id="fifthCheckbox">
-                                    <label class="form-check-label" for="fifthCheckbox">Civil, Environmental and Architectural Engineering</label>
-                                </li>
-                                <li class="list-group-item">
-                                    <input class="form-check-input me-1" type="checkbox" value="" id="sixthCheckbox">
-                                    <label class="form-check-label" for="sixthCheckbox">Computer Science</label>
-                                </li>
-                                <li class="list-group-item">
-                                    <input class="form-check-input me-1" type="checkbox" value="" id="seventhCheckbox">
-                                    <label class="form-check-label" for="seventhCheckbox">Creative Technology and Design</label>
-                                </li>
-                                <li class="list-group-item">
-                                    <input class="form-check-input me-1" type="checkbox" value="" id="eighthCheckbox">
-                                    <label class="form-check-label" for="eighthCheckbox">Electrical, Computer and Energy Engineering</label>
-                                </li>
-                                <li class="list-group-item">
-                                    <input class="form-check-input me-1" type="checkbox" value="" id="ninthCheckbox">
-                                    <label class="form-check-label" for="ninthCheckbox">Engineering and Applied Science</label>
-                                </li>
-                                <li class="list-group-item">
-                                    <input class="form-check-input me-1" type="checkbox" value="" id="tenthCheckbox">
-                                    <label class="form-check-label" for="tenthCheckbox">Engineering Management</label>
-                                </li>
-                                <li class="list-group-item">
-                                    <input class="form-check-input me-1" type="checkbox" value="" id="eleventhCheckbox">
-                                    <label class="form-check-label" for="eleventhCheckbox">Engineering Physics</label>
-                                </li>
-                                <li class="list-group-item">
-                                    <input class="form-check-input me-1" type="checkbox" value="" id="twelthCheckbox">
-                                    <label class="form-check-label" for="twelthCheckbox">Engineering, Ethics and Society</label>
-                                </li>
-                                <li class="list-group-item">
-                                    <input class="form-check-input me-1" type="checkbox" value="" id="thirteenthCheckbox">
-                                    <label class="form-check-label" for="thirteenthCheckbox">Integrated Design Engineering</label>
-                                </li>
-                                <li class="list-group-item">
-                                    <input class="form-check-input me-1" type="checkbox" value="" id="fourteenthCheckbox">
-                                    <label class="form-check-label" for="fourteenthCheckbox">Materials Science and Engineering</label>
-                                </li>
-                                <li class="list-group-item">
-                                    <input class="form-check-input me-1" type="checkbox" value="" id="fifthteenthCheckbox">
-                                    <label class="form-check-label" for="fifthteenthCheckbox">Mechanical Engineering</label>
-                                </li>
-                            </ul>
-                        </a></li>
-
-                    </ul>
-                    </div>
+                
+                 <!-- USER INPUT FOR NEW GRADUATION YEAR-->
+                    <form method="POST" action="/profile_major">
+                            <label for="event_major">Select areas of study:</label>
+                            <select id="event_major" name="event_major">
+                                <option selected></option>
+                                    <option selected></option>
+                                    <option value="Aerospace Engineering Sciences">Aerospace Engineering Sciences</option>
+                                    <option value="Applied Mathematics">Applied Mathematics</option>
+                                    <option value="Biomedical Engineering">Biomedical Engineering</option>
+                                    <option value="Chemical and Biological Engineering">Chemical and Biological Engineering</option>
+                                    <option value="Civil, Environmental and Architectural Engineering">Civil, Environmental and Architectural Engineering</option>
+                                    <option value="Computer Science">Computer Science</option>
+                                    <option value="Creative Technology and Design">Creative Technology and Design</option>
+                                    <option value="Electrical, Computer and Energy Engineering">Electrical, Computer and Energy Engineering</option>
+                                    <option value="Engineering and Applied Science">Engineering and Applied Science</option>
+                                    <option value="Engineering Management">Engineering Management</option>
+                                    <option value="Engineering Physics">Engineering Physics</option>
+                                    <option value="Engineering, Ethics and Society">Engineering, Ethics and Society</option>
+                                    <option value="Integrated Design Engineering">Integrated Design Engineering</option>
+                                    <option value="Materials Science and Engineering">Materials Science and Engineering</option>
+                                    <option value="Mechanical Engineering">Mechanical Engineering</option>
+                            <input type="submit">
+                    </form>
             </td>
     
             <!-- ON SUBMIT: -->
@@ -134,17 +89,17 @@
             <th>DEGREE: {{degree}}</th>
             <td>
              <!-- DROPDOWN FOR DEGREE--> 
-                 <div class="dropdown-center">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Change Degree
-                        </button>
-                         <!-- USER INPUT FOR NEW DEGREE-->
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Associate Degree</a></li>
-                            <li><a class="dropdown-item" href="#">Bachelor Degree</a></li>
-                            <li><a class="dropdown-item" href="#">Doctorate Degree</a></li>
-                        </ul>
-                    </div>
+                    <form method="POST" action="/profile_degree">
+                            <label for="degrees">Select degree type:</label>
+                            <select id="event_degrees" name="event_degrees">
+                                <option selected></option>
+                                <option value="Associate Degree">Associate Degree</option>
+                                <option value="Bachelor Degree">Bachelor Degree</option>
+                                <option value="Doctorate Degree">Doctorate Degree</option>
+                            </select>
+                            <input type="submit">
+                    </form>
+            
             </td>
            
             <!-- ON SUBMIT: -->
