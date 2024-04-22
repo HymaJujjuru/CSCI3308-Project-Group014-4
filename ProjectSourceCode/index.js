@@ -254,6 +254,48 @@ app.post('/create_session', async (req, res) => {
 
 });
 
+
+app.get('/filter_events', async(req, res) => {
+    try{
+        const course_no = req.query.course_no;
+        const day_range_start = req.query.day_range_start;
+        const day_range_end = req.query.day_range_end;
+        const location = req.query.location_filter;
+        const reoccuring_status = req.query.reoccuring_status;
+        let response;
+
+
+
+        if (course_no){
+            response = `SELECT * FROM EventInfo WHERE course_no = ${course_no};`;
+            console.log(response);
+        } else if (day_range_start){
+            response = `SELECT * FROM EventInfo WHERE date > date('${day_range_start}');`;
+            console.log(response);
+        }
+        
+        
+
+        db.any(response, [course_no], [day_range_start], [day_range_end], [location], [reoccuring_status])
+            .then(events => {
+                console.log( [course_no], [day_range_start], [day_range_end], [location], [reoccuring_status])
+                console.log(events);
+                res.render('pages/events', { events });
+            })
+            .catch(err => {
+                res.render('pages/events', {
+                    events: [],
+                    error: true,
+                    message: err.message,
+                });
+            });
+        
+    }catch(err){
+        console.log(err);
+        res.render('pages/events', {message: "No Events Upcoming!!"});
+    }
+});
+
 app.get('/logout', (req, res) => {
     req.session.destroy();
     res.render('pages/login', { message: 'Logged Out Successfully!' });
