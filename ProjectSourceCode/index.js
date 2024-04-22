@@ -192,6 +192,111 @@ app.get('/profile', (req, res) => {
     });
 
 });
+// Profile forms
+// Profile username update 
+app.post('/profile_username', async (req, res) => {
+        /*
+            CREATE TABLE IF NOT EXISTS   users(
+                username VARCHAR(50) PRIMARY KEY,
+                password CHAR(60) NOT NULL,
+                major VARCHAR(50),
+                courses VARCHAR(50),
+                year VARCHAR(50)
+            );
+        */
+
+    try{
+      
+        const updateUsername = await db.any('UPDATE users(username) VALUES ($1)', [req.body.event_username]);
+        if (updateUsername){
+            res.render('pages/profile', { message: 'Profile username successfully updated.', error: false });
+        }
+    }
+    catch(err){
+        console.error(err);
+        res.render('pages/profile', { message: "Profile username could not be updated, please try again.", error: true }); 
+    }
+});
+
+// Profile year update
+app.post('/profile_year', async (req, res) => {
+    /*
+        CREATE TABLE IF NOT EXISTS   users(
+            username VARCHAR(50) PRIMARY KEY,
+            password CHAR(60) NOT NULL,
+            major VARCHAR(50),
+            year VARCHAR(50)
+            degree VARCHAR(50)
+        );
+    */
+    try{   
+        const updateYear = await db.any('UPDATE users(year) VALUES ($1)', [req.body.event_year]);
+        if (updateYear)
+        {
+            res.render('pages/profile', { message: 'Profile year successfully updated.', error: false });
+        }
+    }
+    catch(err){
+        console.error(err);
+        res.render('pages/profile', { message: "Profile year could not be updated, please try again.", error: true }); 
+    }
+});
+
+// Profile major update
+app.post('/profile_major', async (req, res) => {
+        /*
+            CREATE TABLE IF NOT EXISTS   users(
+                username VARCHAR(50) PRIMARY KEY,
+                password CHAR(60) NOT NULL,
+                major VARCHAR(50),
+                courses VARCHAR(50),
+                year VARCHAR(50)
+            );
+        */
+
+
+    try{
+        // update major
+        const updateMajor = await db.any('UPDATE users(major) VALUES ($1)', [req.body.event_majors]);
+        if (updateMajor)
+        {
+            res.render('pages/profile', { message: 'Profile major successfully updated.', error: false });
+        }
+    }
+    catch(err){
+        console.error(err);
+        res.render('pages/profile', { message: "Profile major could not be updated, please try again.", error: true }); 
+    }
+
+
+});
+// Profile degree update
+app.post('/profile_degree', async (req, res) => {
+        /*
+            CREATE TABLE IF NOT EXISTS   users(
+                username VARCHAR(50) PRIMARY KEY,
+                password CHAR(60) NOT NULL,
+                major VARCHAR(50),
+                courses VARCHAR(50),
+                year VARCHAR(50)
+            );
+        */
+
+
+    try{
+            const updateDegree = await db.any('UPDATE users(degree) VALUES ($1)', [req.body.event_degrees]);
+            if (updateDegree)
+            {
+                res.render('pages/profile', { message: 'Profile degree successfully updated.', error: false });
+            }
+    }
+    catch(err){
+        console.error(err);
+        res.render('pages/profile', { message: "Profile degree could not be updated, please try again.", error: true }); 
+    }
+
+
+});
 
 app.post('/create_session', async (req, res) => {
     /* 
