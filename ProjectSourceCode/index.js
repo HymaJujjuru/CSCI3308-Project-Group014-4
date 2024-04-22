@@ -228,7 +228,7 @@ app.post('/profile_username', async (req, res) => {
 
     try{
       
-        const updateUsername = await db.any('UPDATE users SET username = ($1);', [req.body.event_username]);
+        const updateUsername = await db.any('UPDATE users SET username = $1;', [req.body.event_username]);
         if (updateUsername){
             res.render('pages/profile', { message: 'Profile username successfully updated.', error: false });
         }
@@ -251,7 +251,7 @@ app.post('/profile_year', async (req, res) => {
         );
     */
     try{   
-        const updateYear = await db.any('UPDATE users SET year = ($1);', [req.body.event_year]);
+        const updateYear = await db.any('UPDATE users SET year = $1;', [req.body.event_year]);
         if (updateYear)
         {
             res.render('pages/profile', { message: 'Profile year successfully updated.', error: false });
@@ -278,11 +278,9 @@ app.post('/profile_major', async (req, res) => {
 
     try{
         // update major
-        const user = await db.one(`SELECT * FROM users WHERE username = $1;`, [req.body.username]);
-        if(user){
-            const updateMajor = await db.any('UPDATE users SET major = ($1);', [req.body.event_majors]);
-            res.render('pages/profile', { message: 'Profile major successfully updated.', error: false });
-        }
+        const updateMajor = await db.any('UPDATE users SET major = $1;', [req.body.event_major]);
+        res.render('pages/profile', { message: 'Profile major successfully updated.', error: false });
+
     }
     catch(err){
         console.error(err);
@@ -299,13 +297,14 @@ app.post('/profile_degree', async (req, res) => {
                 password CHAR(60) NOT NULL,
                 major VARCHAR(50),
                 courses VARCHAR(50),
-                year VARCHAR(50)
+                year VARCHAR(50),
+                degree VARCHAR(50)
             );
         */
 
 
     try{
-            const updateDegree = await db.any('UPDATE users SET degree = ($1);', [req.body.event_degrees]);
+            const updateDegree = await db.any('UPDATE users SET degree = $1;', [req.body.event_degrees]);
             if (updateDegree)
             {
                 res.render('pages/profile', { message: 'Profile degree successfully updated.', error: false });
