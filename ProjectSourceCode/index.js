@@ -361,6 +361,7 @@ app.post('/create_session', async (req, res) => {
 
 app.get('/filter_events', async(req, res) => {
     try{
+        const course_code = req.query.course_code;
         const course_no = req.query.course_no;
         const day_range_start = req.query.day_range_start;
         const day_range_end = req.query.day_range_end;
@@ -370,6 +371,31 @@ app.get('/filter_events', async(req, res) => {
 
 
 
+        
+        if (course_code){
+            response = `SELECT * FROM Course as C INNER JOIN EventInfo as E ON C.course_no = E.course_no WHERE c.course_code = '${course_code}'`;
+            if (course_no){
+                response += ` AND course_no = ${course_no}`;
+                console.log(response);
+            }
+            if (day_range_start){
+                response += ` AND date > date('${day_range_start}')`;
+                console.log(response);
+            }
+            if (day_range_end){
+                response += ` AND date < date('${day_range_end}')`;
+                console.log(response);
+            }
+            if (location){
+                response += ` AND location = '${location}'`;
+                console.log(response);
+            }
+            if (reoccuring_status){
+                response += ` AND reoccuring_status = True`;
+            }
+            response += `;`;
+            console.log(response);
+        }
         if (course_no){
             response = `SELECT * FROM EventInfo WHERE course_no = ${course_no}`;
             if (day_range_start){
