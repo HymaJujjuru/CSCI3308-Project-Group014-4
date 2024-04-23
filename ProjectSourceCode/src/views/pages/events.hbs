@@ -46,13 +46,25 @@
                         <div> <!--Start of form inputs-->
                             <!--CLASS-->
                             <div class="row mb-3;">
+                            
                                 <label for="study_class" class="col-sm-2 col-form-label col-form-label-sm">Class:</label>
                                 <div class="col-sm-10">
                                     <input list="study_class" id="course_no" name="course_no" style="width: 100%;" >
+                                    <p style="color:grey; font-size: 10pt" >Enter a class name, for multpile, use commas inbetween. (CSCI 2400, CSCI 3002, CSCI 1300...)</p>
+                                </div>
+                            </div>
+                            <!--LOCATION-->
+                             <div class="row mb-3">
+                                <label for="study_location" name="study_location"
+                                    class="col-sm-2 col-form-label col-form-label-sm">Location:</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control form-control-sm" id="location_filter" name="location_filter">
                                 </div>
                             </div>
                             <!--DAY-->
+                            
                             <div class="row mb-3">
+                                <p>Select a range of dates:</p>
                                 <label for="study_day" name="study_day" class="col-sm-2 col-form-label col-form-label-sm" >Start Date:</label>
                                 <div class="col-sm-10">
                                     <input type="date" class="form-control form-control-sm" name="day_range_start" id="day_range_start">
@@ -64,14 +76,7 @@
                                     <input type="date" class="form-control form-control-sm" name="day_range_end" id="day_range_end">
                                 </div>
                             </div>
-                            <!--LOCATION-->
-                            <div class="row mb-3">
-                                <label for="study_location" name="study_location"
-                                    class="col-sm-2 col-form-label col-form-label-sm">Location:</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control form-control-sm" id="location_filter" name="location_filter">
-                                </div>
-                            </div>
+                           
                             <!--Reoccuring Status-->
                             <div class="row mb-3">
                                 <p>Do you want the session to be reoccuring?</p>

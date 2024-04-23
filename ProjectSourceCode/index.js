@@ -371,10 +371,60 @@ app.get('/filter_events', async(req, res) => {
 
 
         if (course_no){
-            response = `SELECT * FROM EventInfo WHERE course_no = ${course_no};`;
+            response = `SELECT * FROM EventInfo WHERE course_no = ${course_no}`;
+            if (day_range_start){
+                response += ` AND date > date('${day_range_start}')`;
+                console.log(response);
+            }
+            if (day_range_end){
+                response += ` AND date < date('${day_range_end}')`;
+                console.log(response);
+            }
+            if (location){
+                response += ` AND location = '${location}'`;
+                console.log(response);
+            }
+            if (reoccuring_status){
+                response += ` AND reoccuring_status = True`;
+            }
+            response += `;`;
             console.log(response);
         } else if (day_range_start){
-            response = `SELECT * FROM EventInfo WHERE date > date('${day_range_start}');`;
+            response = `SELECT * FROM EventInfo WHERE date > date('${day_range_start}')`;
+            if (day_range_end){
+                response += ` AND date < date('${day_range_end}')`;
+                console.log(response);
+            }
+            if (location){
+                response += ` AND location = '${location}'`;
+                console.log(response);
+            }
+            if (reoccuring_status){
+                response += ` AND reoccuring_status = True`;
+            }
+            response += `;`;
+            
+            console.log(response);
+        } else if (day_range_end){
+            response = `SELECT * FROM EventInfo WHERE date > date('${day_range_end}')`;
+            if (location){
+                response += ` AND location = '${location}'`;
+                console.log(response);
+            }
+            if (reoccuring_status){
+                response += ` AND reoccuring_status = True`;
+            }
+            response += `;`;
+            console.log(response);
+        } else if (location){
+            response = `SELECT * FROM EventInfo WHERE location = '${location}'`;
+            if (reoccuring_status){
+                response += ` AND reoccuring_status = True`;
+            }
+            response += `;`;
+            console.log(response);
+        } else if (reoccuring_status){
+            response = `SELECT * FROM EventInfo WHERE reoccuring_status = True;`;
             console.log(response);
         }
         
