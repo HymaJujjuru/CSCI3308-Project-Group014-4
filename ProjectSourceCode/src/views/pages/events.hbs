@@ -10,10 +10,14 @@
                 Start Time: {{this.start_time}} <br>
                 End Time: {{this.end_time}} <br>
                 Location: {{this.location}} <br>
+                Reoccuring: {{this.reoccuring_status}}
             </div>
         </div>
         <div class="col">
         <a class="btn btn-primary" onclick="addEventToCalendar('{{this.course_no}}', '{{this.date}}', '{{this.start_time}}', '{{this.end_time}}', '{{this.location}}')">Add to your Calendar!</a>
+        </div>
+        <div class="col">
+            {{!-- <form method="POST" action="/delete_events"><a class="btn btn-primary">Delete Event!</a></form> --}}
         </div>
         <br>
     </div>
@@ -124,12 +128,14 @@
                             <div class="row mb-3;">
                                 <label for="study_class" class="col-sm-2 col-form-label col-form-label-sm">Class:</label>
                                 <div class="col-sm-10">
-                                    <input list="study_class" id="study_class" name="study_class" required>
-                                    <datalist name="study_class">
-                                        {{#each Course}}
-                                        <option value={{course_name}}>
+                                        <select name="study_class">
+                                            {{#each Course}}
+                                            <option href="#">{{this.course_code}} {{this.course_no}}</option>
                                             {{/each}}
-                                    </datalist>
+                                        </select>
+                                            {{!-- <button class="dropbtn">Dropdown</button> --}}
+                                        
+
                                 </div>
                             </div>
                             <!--DAY-->

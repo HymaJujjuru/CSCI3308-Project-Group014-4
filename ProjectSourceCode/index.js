@@ -28,7 +28,7 @@ const hbs = handlebars.create({
 
 // database configuration
 const dbConfig = {
-    host: 'db', // the database server
+    host: process.env.host, // the database server
     port: 5432, // the database port
     database: process.env.POSTGRES_DB, // the database name
     user: process.env.POSTGRES_USER, // the user account to connect with
@@ -190,11 +190,14 @@ app.get('/home', (req, res) => {
 app.get('/events', async(req, res) => {
     try{
         const response = `SELECT * FROM EventInfo;`;
+        const courses = `SELECT * FROM Course;`;
 
-        db.any(response)
+        db.task('get-everything', task => {
+            return task.batch([task.any(response), task.any(courses)]);
+        })
             .then(events => {
                 console.log(events);
-                res.render('pages/events', { events });
+                res.render('pages/events', {events: events[0], Course: events[1]});
             })
             .catch(err => {
                 res.render('pages/events', {
