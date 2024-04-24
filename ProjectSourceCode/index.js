@@ -81,6 +81,14 @@ app.use(
     })
 );
 
+// const username = session.user.username;
+// const first_name = session.user.first_name;
+// const last_name = session.user.last_name;
+// const email = session.user.email;
+// const year = session.user.year;
+// const major = session.user.major;
+// const degree = session.user.degree;
+
 // *****************************************************
 // <!-- Section 4 : API Routes -->
 // *****************************************************
@@ -166,6 +174,13 @@ const auth = (req, res, next) => {
 //Checks for authentication
 app.use(auth);
 
+app.use(session({
+    secret: 'secret',
+    saveUninitialized: true,
+    resave: true,
+    maxAge: 20000
+}));
+
 //Home
 app.get('/home', (req, res) => {
     res.render('pages/home');
@@ -214,30 +229,30 @@ app.get('/profile', (req, res) => {
 
 });
 // Profile forms
-// Profile username update 
-app.post('/profile_username', async (req, res) => {
-        /*
-            CREATE TABLE IF NOT EXISTS   users(
-                username VARCHAR(50) PRIMARY KEY,
-                password CHAR(60) NOT NULL,
-                major VARCHAR(50),
-                courses VARCHAR(50),
-                year VARCHAR(50)
-            );
-        */
+// // Profile username update 
+// app.post('/profile_username', async (req, res) => {
+//         /*
+//             CREATE TABLE IF NOT EXISTS   users(
+//                 username VARCHAR(50) PRIMARY KEY,
+//                 password CHAR(60) NOT NULL,
+//                 major VARCHAR(50),
+//                 courses VARCHAR(50),
+//                 year VARCHAR(50)
+//             );
+//         */
 
-    try{
+//     try{
       
-        const updateUsername = await db.any('UPDATE users SET username = $1;', [req.body.event_username]);
-        if (updateUsername){
-            res.render('pages/profile', { message: 'Profile username successfully updated.', error: false });
-        }
-    }
-    catch(err){
-        console.error(err);
-        res.render('pages/profile', { message: "Profile username could not be updated, please try again.", error: true }); 
-    }
-});
+//         const updateUsername = await db.any('UPDATE users SET username = $1;', [req.body.event_username]);
+//         if (updateUsername){
+//             res.render('pages/profile', { message: 'Profile username successfully updated.', error: false });
+//         }
+//     }
+//     catch(err){
+//         console.error(err);
+//         res.render('pages/profile', { message: "Profile username could not be updated, please try again.", error: true }); 
+//     }
+// });
 
 // Profile year update
 app.post('/profile_year', async (req, res) => {
@@ -252,10 +267,9 @@ app.post('/profile_year', async (req, res) => {
     */
     try{   
         const updateYear = await db.any('UPDATE users SET year = $1;', [req.body.event_year]);
-        if (updateYear)
-        {
-            res.render('pages/profile', { message: 'Profile year successfully updated.', error: false });
-        }
+        req.session.user.year = req.body.event_year;
+        res.render('pages/profile', { message: 'Profile year successfully updated.', error: false });
+        res.redirect('/profile');
     }
     catch(err){
         console.error(err);
@@ -279,7 +293,9 @@ app.post('/profile_major', async (req, res) => {
     try{
         // update major
         const updateMajor = await db.any('UPDATE users SET major = $1;', [req.body.event_major]);
+        req.session.user.major = req.body.event_major;
         res.render('pages/profile', { message: 'Profile major successfully updated.', error: false });
+        res.redirect('/profile');
 
     }
     catch(err){
@@ -304,11 +320,13 @@ app.post('/profile_degree', async (req, res) => {
 
 
     try{
-            const updateDegree = await db.any('UPDATE users SET degree = $1;', [req.body.event_degrees]);
-            if (updateDegree)
-            {
-                res.render('pages/profile', { message: 'Profile degree successfully updated.', error: false });
-            }
+        const updateDegree = await db.any('UPDATE users SET degree = $1;', [req.body.event_degrees]);
+        req.session.user.degree = req.body.event_degrees;
+        if (updateDegree)
+        {
+            res.render('pages/profile', { message: 'Profile degree successfully updated.', error: false });
+            res.redirect('/profile');
+        }
     }
     catch(err){
         console.error(err);
@@ -368,9 +386,6 @@ app.get('/filter_events', async(req, res) => {
         const location = req.query.location_filter;
         const reoccuring_status = req.query.reoccuring_status;
         let response;
-
-
-
         
         if (course_code){
             response = `SELECT * FROM Course as C INNER JOIN EventInfo as E ON C.course_no = E.course_no WHERE c.course_code = '${course_code}'`;
