@@ -15,49 +15,60 @@ function gapiLoaded() {
     gapi.load('client', initializeGapiClient);
 }
 async function initializeGapiClient() {
-    await gapi.client.init({
-        apiKey: 'AIzaSyAVqfakhPXEU378QnEZocyrisCZ3ZhNHO4',
-        discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest'],
-    });
-    gapiInited = true;
-    maybeEnableButtons();
+  await gapi.client.init({
+      apiKey: 'AIzaSyAVqfakhPXEU378QnEZocyrisCZ3ZhNHO4',
+      discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest'],
+  });
+  gapiInited = true;
+  checkTokenOnClientLoad();
 }
 function gisLoaded() {
-    tokenClient = google.accounts.oauth2.initTokenClient({
-        client_id: '69914372338-1f5jkuep8a7bi9jstknohbjhe1if7pio.apps.googleusercontent.com',
-        scope: 'https://www.googleapis.com/auth/calendar',
-        callback: '',
-    });
-    gisInited = true;
-    maybeEnableButtons();
+  tokenClient = google.accounts.oauth2.initTokenClient({
+      client_id: '69914372338-1f5jkuep8a7bi9jstknohbjhe1if7pio.apps.googleusercontent.com',
+      scope: 'https://www.googleapis.com/auth/calendar',
+      callback: tokenResponseHandler,
+  });
+  gisInited = true;
+  maybeEnableButtons();
+}
+function checkTokenOnClientLoad() {
+  const token = sessionStorage.getItem('gapi_token');
+  if (token) {
+      gapi.client.setToken({access_token: token});
+      document.getElementById('signout_button').style.visibility = 'visible';
+      document.getElementById('authorize_button').style.visibility = 'hidden';
+      loadUserCalendar();
+  } else {
+      maybeEnableButtons();
+  }
 }
 function maybeEnableButtons() {
-    if (gapiInited && gisInited) {
-        document.getElementById('authorize_button').style.visibility = 'visible';
-        document.getElementById('signout_button').style.visibility = 'hidden';  // Initially hidden
-    }
+  if (gapiInited && gisInited) {
+      document.getElementById('authorize_button').style.visibility = 'visible';
+      document.getElementById('signout_button').style.visibility = 'hidden';
+  }
 }
 function handleAuthClick() {
-    tokenClient.callback = async (resp) => {
-        if (resp.error !== undefined) {
-            throw (resp);
-        }
-        document.getElementById('signout_button').style.visibility = 'visible';
-        document.getElementById('authorize_button').style.visibility = 'hidden';
-        loadUserCalendar();
-    };
-    tokenClient.requestAccessToken({prompt: 'consent'});
+  tokenClient.callback = tokenResponseHandler;
+  tokenClient.requestAccessToken({prompt: 'consent'});
+}
+function tokenResponseHandler(resp) {
+  sessionStorage.setItem('gapi_token', resp.access_token);
+  gapi.client.setToken({access_token: resp.access_token});
+  document.getElementById('signout_button').style.visibility = 'visible';
+  document.getElementById('authorize_button').style.visibility = 'hidden';
+  loadUserCalendar();
 }
 function handleSignoutClick() {
-    const token = gapi.client.getToken();
-    if (token !== null) {
-        google.accounts.oauth2.revoke(token.access_token);
-        gapi.client.setToken('');
-        document.getElementById('signout_button').style.visibility = 'hidden';
-        document.getElementById('authorize_button').style.visibility = 'visible';
-    }
+  const token = sessionStorage.getItem('gapi_token');
+  if (token) {
+      google.accounts.oauth2.revoke(token);
+      gapi.client.setToken('');
+      sessionStorage.removeItem('gapi_token');
+      document.getElementById('signout_button').style.visibility = 'hidden';
+      document.getElementById('authorize_button').style.visibility = 'visible';
+  }
 }
-
 async function loadUserCalendar() {
   try {
       const response = await gapi.client.calendar.calendars.get({ 'calendarId': 'primary' });
@@ -66,7 +77,6 @@ async function loadUserCalendar() {
   } catch (error) {
   }
 }
-
 function addEventToCalendar(courseNo, dateString, startTime, endTime, location) {
   const date = new Date(dateString);
   const formattedDate = date.toISOString().split('T')[0];
