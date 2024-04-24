@@ -190,11 +190,14 @@ app.get('/home', (req, res) => {
 app.get('/events', async(req, res) => {
     try{
         const response = `SELECT * FROM EventInfo;`;
+        const courses = `SELECT * FROM Course;`;
 
-        db.any(response)
+        db.task('get-everything', task => {
+            return task.batch([task.any(response), task.any(courses)]);
+        })
             .then(events => {
                 console.log(events);
-                res.render('pages/events', { events });
+                res.render('pages/events', {events: events[0], Course: events[1]});
             })
             .catch(err => {
                 res.render('pages/events', {
