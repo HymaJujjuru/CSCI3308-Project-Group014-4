@@ -231,32 +231,8 @@ app.get('/profile', (req, res) => {
     });
 
 });
+
 // Profile forms
-// // Profile username update 
-// app.post('/profile_username', async (req, res) => {
-//         /*
-//             CREATE TABLE IF NOT EXISTS   users(
-//                 username VARCHAR(50) PRIMARY KEY,
-//                 password CHAR(60) NOT NULL,
-//                 major VARCHAR(50),
-//                 courses VARCHAR(50),
-//                 year VARCHAR(50)
-//             );
-//         */
-
-//     try{
-      
-//         const updateUsername = await db.any('UPDATE users SET username = $1;', [req.body.event_username]);
-//         if (updateUsername){
-//             res.render('pages/profile', { message: 'Profile username successfully updated.', error: false });
-//         }
-//     }
-//     catch(err){
-//         console.error(err);
-//         res.render('pages/profile', { message: "Profile username could not be updated, please try again.", error: true }); 
-//     }
-// });
-
 // Profile year update
 app.post('/profile_year', async (req, res) => {
     /*
