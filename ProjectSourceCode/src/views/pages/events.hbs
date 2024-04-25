@@ -14,7 +14,7 @@
             </div>
         </div>
         <div class="col">
-        <a class="btn btn-primary" onclick="addEventToCalendar('{{this.course_no}}', '{{this.date}}', '{{this.start_time}}', '{{this.end_time}}', '{{this.location}}')">Add to your Calendar!</a>
+        <a class="btn btn-primary" onclick="addEventToCalendar('{{this.course_no}}', '{{this.date}}', '{{this.start_time}}', '{{this.end_time}}', '{{this.location}}', {{this.reoccuring_status}})">Add to your Calendar!</a>
         </div>
         <div class="col">
             {{!-- <form method="POST" action="/delete_events"><a class="btn btn-primary">Delete Event!</a></form> --}}

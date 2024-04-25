@@ -77,7 +77,7 @@ async function loadUserCalendar() {
   } catch (error) {
   }
 }
-function addEventToCalendar(courseNo, dateString, startTime, endTime, location) {
+function addEventToCalendar(courseNo, dateString, startTime, endTime, location, reoccur) {
   const date = new Date(dateString);
   const formattedDate = date.toISOString().split('T')[0];
   const adjustTime = (time, isStart) => {
@@ -115,6 +115,10 @@ function addEventToCalendar(courseNo, dateString, startTime, endTime, location) 
           ]
       }
   };
+
+  if (reoccur) {
+    event['recurrence'] = ['RRULE:FREQ=WEEKLY;COUNT=4'];
+}
 
   const request = gapi.client.calendar.events.insert({
       'calendarId': 'primary',
