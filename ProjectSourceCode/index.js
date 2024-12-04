@@ -1,5 +1,5 @@
 // *****************************************************
-// <!-- Importing Dependencies -->
+// <!-- Section 1 : Import Dependencies -->
 // *****************************************************
 
 const express = require('express'); // To build an application server or API
@@ -16,7 +16,7 @@ const axios = require('axios'); // To make HTTP requests from our server.
 Handlebars.registerHelper('dateFormat', require('handlebars-dateformat'));
 
 // *****************************************************
-// <!-- Connect to DB -->
+// <!-- Section 2 : Connect to DB -->
 // *****************************************************
 
 // create `ExpressHandlebars` instance and configure the layouts and partials dir.
@@ -55,11 +55,10 @@ db.connect()
         console.log('ERROR:', error.message || error);
     });
 // *****************************************************
-// <!-- App Settings -->
+// <!-- Section 3 : App Settings -->
 // *****************************************************
 
-app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(express.static(__dirname + '/'));
 
 // Register `hbs` as our view engine using its bound `engine()` function.
 app.engine('hbs', hbs.engine);
@@ -86,16 +85,19 @@ app.use(
 // const first_name = session.user.first_name;
 // const last_name = session.user.last_name;
 // const email = session.user.email;
-
+// const year = session.user.year;
+// const major = session.user.major;
+// const degree = session.user.degree;
 
 // *****************************************************
-// <!-- API Routes -->
+// <!-- Section 4 : API Routes -->
 // *****************************************************
 
 app.get('/welcome', (req, res) => {
     res.json({status: 'success', message: 'Welcome!'});
   });
 
+//Copied from Lab 8
 app.get('/', (req, res) => {
     res.redirect('/login');
 });
@@ -114,7 +116,7 @@ app.post('/register', async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(req.body.password, salt);
 
-   
+    // To-DO: Insert username and hashed password into the 'users' table
     try {
         const insertResult = await db.any('INSERT INTO users(username, password) VALUES ($1, $2) RETURNING *;', [req.body.username, hash]);
 
@@ -211,13 +213,271 @@ app.get('/events', async(req, res) => {
     }
 });
 
+//Calendar
+app.get('/calendar', (req, res) => {
+    res.render('pages/calendar');
+});
+
+//Profile
+app.get('/profile', (req, res) => {
+    res.render('pages/profile', {
+        username: req.session.user.username,
+        first_name: req.session.user.first_name,
+        last_name: req.session.user.last_name,
+        email: req.session.user.email,
+        year: req.session.user.year,
+        major: req.session.user.major,
+        degree: req.session.user.degree,
+    });
+
+});
+
+// Profile forms
+// Profile year update
+app.post('/profile_year', async (req, res) => {
+    /*
+        CREATE TABLE IF NOT EXISTS   users(
+            username VARCHAR(50) PRIMARY KEY,
+            password CHAR(60) NOT NULL,
+            major VARCHAR(50),
+            year VARCHAR(50)
+            degree VARCHAR(50)
+        );
+    */
+    try{   
+        const updateYear = await db.any('UPDATE users SET year = $1;', [req.body.event_year]);
+        req.session.user.year = req.body.event_year;
+        res.render('pages/profile', { message: 'Profile year successfully updated.', error: false });
+        res.redirect('/profile');
+    }
+    catch(err){
+        console.error(err);
+        res.render('pages/profile', { message: "Profile year could not be updated, please try again.", error: true }); 
+    }
+});
+
+// Profile major update
+app.post('/profile_major', async (req, res) => {
+        /*
+            CREATE TABLE IF NOT EXISTS   users(
+                username VARCHAR(50) PRIMARY KEY,
+                password CHAR(60) NOT NULL,
+                major VARCHAR(50),
+                courses VARCHAR(50),
+                year VARCHAR(50)
+            );
+        */
+
+
+    try{
+        // update major
+        const updateMajor = await db.any('UPDATE users SET major = $1;', [req.body.event_major]);
+        req.session.user.major = req.body.event_major;
+        res.render('pages/profile', { message: 'Profile major successfully updated.', error: false });
+        res.redirect('/profile');
+
+    }
+    catch(err){
+        console.error(err);
+        res.render('pages/profile', { message: "Profile major could not be updated, please try again.", error: true }); 
+    }
+
+
+});
+// Profile degree update
+app.post('/profile_degree', async (req, res) => {
+        /*
+            CREATE TABLE IF NOT EXISTS   users(
+                username VARCHAR(50) PRIMARY KEY,
+                password CHAR(60) NOT NULL,
+                major VARCHAR(50),
+                courses VARCHAR(50),
+                year VARCHAR(50),
+                degree VARCHAR(50)
+            );
+        */
+
+
+    try{
+        const updateDegree = await db.any('UPDATE users SET degree = $1;', [req.body.event_degrees]);
+        req.session.user.degree = req.body.event_degrees;
+        if (updateDegree)
+        {
+            res.render('pages/profile', { message: 'Profile degree successfully updated.', error: false });
+            res.redirect('/profile');
+        }
+    }
+    catch(err){
+        console.error(err);
+        res.render('pages/profile', { message: "Profile degree could not be updated, please try again.", error: true }); 
+    }
+
+
+});
+
+app.post('/create_session', async (req, res) => {
+    /* 
+    EventInfo Database:
+        event_no SERIAL PRIMARY KEY,        --
+        location VARCHAR(120),              --
+        date DATE NOT NULL,                 --
+        filter_no INT,                      What is this?
+        reoccuring_status boolean NOT NULL, --
+        start_time TIME NOT NULL,           --
+        end_time TIME NOT NULL,             --
+        hidden_users VARCHAR(45),           How to insert into db?
+        course_no INT,                      --
+        organizer_no VARCHAR(45) NOT NULL   How to insert into db?
+    */
+    if (!req.body.study_reoccur)
+    {
+        req.body.study_reoccur = false;
+    }
+
+    let strArr = req.body.study_class.split(" ");
+    courseno = strArr[1];
+    var event_no = await db.one("SELECT COUNT(*) as total FROM EventInfo;");
+
+    try{
+        const insertResult = 
+            await db.any(`INSERT INTO EventInfo(event_no, location, date, reoccuring_status, start_time, end_time, hidden_users, course_no) VALUES ($1, $2, $3, $4, $5, $6, $7, $8);`, 
+                [(event_no.total) + 1, req.body.study_location, req.body.study_day, req.body.study_reoccur, req.body.study_time1, req.body.study_time2, null, courseno])
+        .then(data =>{
+            res.render('pages/events', { message: 'Study session successfully created.', error: false });
+        }).catch(err => {
+            res.render('pages/events', { message: 'Study session could not be created, please try again.', error: true });
+        });
+    }
+    catch(err){
+        console.error(err);
+        res.render('pages/events', { message: "Study session could not be created, please try again.", error: true }); 
+    }
+
+});
+
+
+app.get('/filter_events', async(req, res) => {
+    try{
+        const course_code = req.query.course_code;
+        const course_no = req.query.course_no;
+        const day_range_start = req.query.day_range_start;
+        const day_range_end = req.query.day_range_end;
+        const location = req.query.location_filter;
+        const reoccuring_status = req.query.reoccuring_status;
+        let response;
+        
+        if (course_code){
+            response = `SELECT * FROM Course as C INNER JOIN EventInfo as E ON C.course_no = E.course_no WHERE c.course_code = '${course_code}'`;
+            if (course_no){
+                response += ` AND course_no = ${course_no}`;
+                console.log(response);
+            }
+            if (day_range_start){
+                response += ` AND date > date('${day_range_start}')`;
+                console.log(response);
+            }
+            if (day_range_end){
+                response += ` AND date < date('${day_range_end}')`;
+                console.log(response);
+            }
+            if (location){
+                response += ` AND location = '${location}'`;
+                console.log(response);
+            }
+            if (reoccuring_status){
+                response += ` AND reoccuring_status = True`;
+            }
+            response += `;`;
+            console.log(response);
+        }
+        if (course_no){
+            response = `SELECT * FROM EventInfo WHERE course_no = ${course_no}`;
+            if (day_range_start){
+                response += ` AND date > date('${day_range_start}')`;
+                console.log(response);
+            }
+            if (day_range_end){
+                response += ` AND date < date('${day_range_end}')`;
+                console.log(response);
+            }
+            if (location){
+                response += ` AND location = '${location}'`;
+                console.log(response);
+            }
+            if (reoccuring_status){
+                response += ` AND reoccuring_status = True`;
+            }
+            response += `;`;
+            console.log(response);
+        } else if (day_range_start){
+            response = `SELECT * FROM EventInfo WHERE date > date('${day_range_start}')`;
+            if (day_range_end){
+                response += ` AND date < date('${day_range_end}')`;
+                console.log(response);
+            }
+            if (location){
+                response += ` AND location = '${location}'`;
+                console.log(response);
+            }
+            if (reoccuring_status){
+                response += ` AND reoccuring_status = True`;
+            }
+            response += `;`;
+            
+            console.log(response);
+        } else if (day_range_end){
+            response = `SELECT * FROM EventInfo WHERE date > date('${day_range_end}')`;
+            if (location){
+                response += ` AND location = '${location}'`;
+                console.log(response);
+            }
+            if (reoccuring_status){
+                response += ` AND reoccuring_status = True`;
+            }
+            response += `;`;
+            console.log(response);
+        } else if (location){
+            response = `SELECT * FROM EventInfo WHERE location = '${location}'`;
+            if (reoccuring_status){
+                response += ` AND reoccuring_status = True`;
+            }
+            response += `;`;
+            console.log(response);
+        } else if (reoccuring_status){
+            response = `SELECT * FROM EventInfo WHERE reoccuring_status = True;`;
+            console.log(response);
+        }
+        
+        
+
+        db.any(response, [course_no], [day_range_start], [day_range_end], [location], [reoccuring_status])
+            .then(events => {
+                console.log( [course_no], [day_range_start], [day_range_end], [location], [reoccuring_status])
+                console.log(events);
+                res.render('pages/events', { events });
+            })
+            .catch(err => {
+                res.render('pages/events', {
+                    events: [],
+                    error: true,
+                    message: err.message,
+                });
+            });
+        
+    }catch(err){
+        console.log(err);
+        res.render('pages/events', {message: "No Events Upcoming!!"});
+    }
+});
 
 app.get('/logout', (req, res) => {
     req.session.destroy();
     res.render('pages/login', { message: 'Logged Out Successfully!' });
 });
 
-
+app.get('/calendar', (req, res) => {
+    res.render('pages/calendar');
+});
 
 // *****************************************************
 // <!-- Section 5 : Start Server-->

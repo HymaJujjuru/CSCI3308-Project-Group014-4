@@ -1,12 +1,21 @@
-## Team Members 
+# Dev Bytes
+Team Number: 4
 
-Joe Powers, Baxter Romero, Aryan Singh, Michael Sexton, Paul Tracy
+## Team Members (First & Last Name: GitHub Username, Email)
+Hyma Jujjuru: hymajujjuru, hyma.jujjuru@colorado.edu
 
-# Backout
-Clubs and organizations today struggle with a fragmented approach to managing their activities, communication, and engagement. There’s no centralized way for them to coordinate with their members or promote events effectively, leaving students disconnected and opportunities missed. Meanwhile, students are spending more time trapped on social media, wasting hours online instead of getting involved in real-life activities.
+Apollo Hoffman: Apollo10101, kaho5265@colorado.edu
 
-With Backout, we’re offering a solution that empowers clubs, groups, and local businesses with an easy-to-use platform to schedule, communicate, and engage with their members. Our app streamlines event coordination and makes it simple to inspire users to find and join the activities they love. We’re creating a space that gets people off their screens and back outside—connecting communities, fostering engagement, and helping everyone make the most of their time.
+Santana Reyes: santanareyes, santana.reyes@colorado.edu
 
+Michael Sexton: MichaelSexton3389, mise3389@colorado.edu
 
-# Dev Notes
-To access db, use docker-compose exec db psql -U postgres. (\c to connect, \dt to show tables, SELECT * FROM tablename;)
+Billy Daves: wida4809, wida4809@colorado.edu    
+
+# Study Bytes
+This application is a campus study group website that displays local study groups happening on or near campus in Boulder. This website is intended to address the problem of finding/being aware of study groups to join on campus. Our target audience is students, and the functionality is to inform/advertise study groups through an easy user interface, with an option to search for specific study groups based on filtering options.
+
+There are 6 different user interfaces for the user to navigate through. The first is the main Study Bytes page, which will prompt the user to either login or sign up for an account. Either option will lead to a pop-up menu for the user to enter their information for registering or signing in. After the user is signed in, a calendar view of general open study groups be displayed. The user has the option to navigate to the advanced events list, profile page, or log out via a navigation bar at the top of the page. The Events pages will list the available study sessions for students to add to their calendars to save the dates. The Profile page allows users to view their events and modify user details. The final navigation bar option "log out" will just log the user out of the application and take them back to the main Study Bytes page, which will again prompt the user to log in or sign up for an account.
+
+# Vision Statement
+A website for the amazing students of Boulder where they can find the study groups organized for them.

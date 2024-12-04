@@ -1,28 +1,14 @@
 <header>
+    <script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
+    <script async defer src="https://accounts.google.com/gsi/client" onload="gisLoaded()"></script>
     <script type="text/javascript" src="/src/resources/js/script.js"></script>
     <nav class="navbar navbar-expand-sm border-bottom">
         <div class="container">
-            <!-- Logo -->
-            <a href="/home" class="navbar-brand">
-                <img 
-                    src="/images/Backoutlogo.png" 
-                    alt="Backout Logo" 
-                    style="
-                        width: 40px; /* Set to a smaller width for the logo */
-                        height: auto; /* Maintain aspect ratio */
-                        display: inline-block; /* Inline block for proper alignment */
-                        margin-right: 10px; /* Space between logo and nav links */
-                        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Add shadow */
-                    "
-                >
-            </a>
-
             <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbar-collapse" aria-controls="navbar" aria-expanded="false"
                 aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
             <div class="collapse navbar-collapse" id="navbar-collapse">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
@@ -34,15 +20,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/profile">Profile</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/clubs">Clubs</a>
-                    </li>
-                </ul>
 
+                </ul>
                 <div class="nav-item me-1">
                     <a class="nav-link" href="/logout">Logout</a>
                 </div>
-
                 <div class="nav-item me-1">
                     <button class="btn btn-success" id="authorize_button" onclick="handleAuthClick()" style="visibility: hidden;">Authorize</button>
                     <button class="btn btn-secondary" id="signout_button" onclick="handleSignoutClick()" style="visibility: hidden;">De-Authorize</button>
