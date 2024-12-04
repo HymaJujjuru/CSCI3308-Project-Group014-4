@@ -1,3 +1,0 @@
-Date: 4/15/24 - 16:45 Scribe: Michael 
-All members present.
-Need to be done by end of next week so that we can present for the meeting next Monday. Focus on functionality over UI, ditch the calendar if necessary to focus on complex filtering. Possibly go to office hours if we need help with the filtering routes.
